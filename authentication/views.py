@@ -7,16 +7,14 @@ from django.contrib.auth import authenticate , login , logout
 from .models import farmerdata
 def signin(request):
     if request.method == "POST":
-        username=request.POST.get('email')
-        password=request.POST.get('pass')
-        user = authenticate(username=username, password=password)
-        
+        e=request.POST.get('email')
+        p=request.POST.get('pass')
+        user=authenticate(request,email=e,password=p)
+        print(user)
         if user is not None:
-            login(request, user)
-            messages.success(request, "Successfully logged in")
+            return render(request,'profile.html',{'email':user.email,'dob':user.dob,'name':user.fname})
         else:
-            messages.error(request, "Invalid credentials")
-            return redirect('/signin/')
+            return render(request,'authentication/signin.html',{'massage':"email/password is incorrect"})
     return render(request, 'authentication/signin.html')
 
 def signup(request):
@@ -28,12 +26,12 @@ def signup(request):
         if pass1!=pass2:
             return render(request, 'authentication/signup.html',{"massage":"password must be same"})
         try:
+            email=request.POST.get('email')
             fname=request.POST.get('fname')
             dob=request.POST.get('dob')
-            email=request.POST.get('email')
             newfarmer=farmerdata(fname=fname,dob=dob,email=email,password=pass1)
             newfarmer.save()
-            return redirect(request, 'authentication/signin.html')
+            return redirect('/signin/')
         except IntegrityError:
             return render(request, 'authentication/signup.html',{"massage":"email is already registered with us"})
         
