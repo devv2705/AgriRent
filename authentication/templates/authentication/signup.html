@@ -293,10 +293,30 @@
       width: 100%;
     }
 
-
-
-
-
+    /* css for date starts here */
+    /* design the date field so it looks like other input field */
+    .date {
+      background-color: #f6f6f6;
+      border: none;
+      color: #757575;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 5px;
+      width: 85%;
+      border: 2px solid #f6f6f6;
+      -webkit-transition: all 0.5s ease-in-out;
+      -moz-transition: all 0.5s ease-in-out;
+      -ms-transition: all 0.5s ease-in-out;
+      -o-transition: all 0.5s ease-in-out;
+      transition: all 0.5s ease-in-out;
+      -webkit-border-radius: 5px 5px 5px 5px;
+      border-radius: 5px 5px 5px 5px;
+    }
+    
+    /* css for date ends here */
     *:focus {
       outline: none;
     }
@@ -316,19 +336,21 @@
       <form action="" id="form" method="post">
         {%csrf_token%}
         <input type="text" id="fname" class="fadeIn second" name="fname" placeholder="Full Name" required>
-        <input type="text" id="dob" class="fadeIn third" name="dob" placeholder="dd/mm/yyyy" required><br>
+        <!-- create a date of birth field so that user can directly select the date from the calender with same formate as other input field -->
+        <input type="date" id="dob" class="date" name="dob" placeholder="dd/mm/yyyy" required><br>
         <input type="text" id="email" class="fadeIn second" name="email" placeholder="Email/Username" required><br>
         <input type="password" id="pass1" class="fadeIn third" name="pass1" placeholder="Passowrd" required><br>
         <input type="password" id="pass2" class="fadeIn third" name="pass2" placeholder="Retype Passowrd" required><br>
         <p style="color: red;">{{massage}}</p>
-        <input type="submit" class="fadeIn fourth" value="Sign up" >
+        <input type="submit" class="fadeIn fourth" value="Sign up">
       </form>
       <div id="formFooter">
         <p>already have account? <a class="underlineHover" href="/signin" style="text-decoration: none;">sign in</a></p>
       </div>
-
+      
     </div>
   </div>
 </body>
 
 </html>
+<!-- <input type="text" id="dob" class="fadeIn third" name="dob" placeholder="dd/mm/yyyy" required><br> -->
