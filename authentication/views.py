@@ -1,6 +1,4 @@
 from django.shortcuts import redirect, render
-from django.http import HttpResponse
-from django.contrib.auth.models import User
 from django.contrib import messages
 from django.db import IntegrityError
 from django.contrib.auth import authenticate , login , logout
@@ -10,6 +8,7 @@ def signin(request):
         e=request.POST.get('email')
         p=request.POST.get('pass')
         user=authenticate(request,email=e,password=p)
+
         print(user)
         if user is not None:
             return render(request,'profile.html',{'email':user.email,'dob':user.dob,'name':user.fname})

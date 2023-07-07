@@ -1,3 +1,4 @@
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -236,7 +237,7 @@ input[type=submit]:hover {
 
 <body>
   <header class="header" id="head">
-    <a href="#" class="logo"><img style="width: 25%;height: 25%;" src="/logo.png" alt=""></a>
+    <a href="#" class="logo"><img style="width: 25%;height: 25%;" src="{% static '/images/logo.png'%}" alt=""></a>
     <nav class="nav-items">
         <button type="button" class="btn btn-light" style="margin-right: 10px;"><a href="/signin">Sign in</a></button>
      <button type="button" class="btn btn-dark"><a href="signup" style="color: whitesmoke;">Sign up</a></button> 
