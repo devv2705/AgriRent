@@ -1,4 +1,3 @@
-{%load static%}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -194,15 +193,53 @@
       color: #a1a1a1;
       padding: 10px 20px;
     }
+    input[type=text], select, textarea {
+  width: 100%; /* Full width */
+  padding: 12px; /* Some padding */  
+  border: 1px solid #ccc; /* Gray border */
+  border-radius: 4px; /* Rounded borders */
+  box-sizing: border-box; /* Make sure that padding and width stays in place */
+  margin-top: 6px; /* Add a top margin */
+  margin-bottom: 16px; /* Bottom margin */
+  resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
+}
+
+/* Style the submit button with a specific background color etc */
+input[type=submit] {
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* When moving the mouse over the submit button, add a darker green color */
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+/* Add a background color and some padding around the form */
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+#contactus{
+    background-image: url("https://c4.wallpaperflare.com/wallpaper/674/65/161/farm-farmers-water-drops-rice-wallpaper-preview.jpg");
+    height: 100vh;
+    background-size: cover;
+    background-attachment: fixed;
+}
   </style>
 </head>
 
 <body>
-  <header class="header">
-    <a href="" class="logo"><img style="width: 25%;height: 25%;" src="/logo.png" alt=""></a>
+  <header class="header" id="head">
+    <a href="#" class="logo"><img style="width: 25%;height: 25%;" src="/logo.png" alt=""></a>
     <nav class="nav-items">
-        <button type="button" class="btn btn-light" style="margin-right: 10px;"><a href="#">Sign in</a></button>
-     <button type="button" class="btn btn-dark"><a href="#" style="color: whitesmoke;">Sign up</a></button> 
+        <button type="button" class="btn btn-light" style="margin-right: 10px;"><a href="/signin">Sign in</a></button>
+     <button type="button" class="btn btn-dark"><a href="signup" style="color: whitesmoke;">Sign up</a></button> 
       
     </nav>
   </header>
@@ -231,18 +268,22 @@
     </div>
     <div class="about-me">
       <div class="about-me-text">
-        <h2>About Me</h2>
+        <h2>About Us</h2>
         <p>AgriRent is a farmer-driven platform where equipment owners can rent out their machinery at competitive prices, while farmers in need can easily find and rent the equipment they require. We foster a collaborative and affordable farming ecosystem, empowering farmers to optimize their investments and overcome equipment ownership challenges. With a user-friendly interface and stringent verification processes, we ensure secure transactions and facilitate transparent communication. Join AgriRent today and be part of a community that revolutionizes farming by sharing resources and promoting mutual growth.</p>
       </div>
       <img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8ZmFybWVyfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60" alt="ABOUT"  >
     </div>
   </main>
+  <section id="contactus">
+    
+   
+  </section>
   <footer class="footer">
-    <div class="copy">&copy; 2022 Developer</div>
+    <div class="copy">&copy; 2023 agrirent</div>
     <div class="bottom-links">
       <div class="links">
         <span>More Info</span>
-        <a href="#">Home</a>
+        <a href="#head">Home</a>
         <a href="#">About</a>
         <a href="#">Contact</a>
       </div>

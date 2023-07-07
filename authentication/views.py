@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.db import IntegrityError
 from django.contrib.auth import authenticate , login , logout
-from .models import usersdata
+from .models import farmerdata
 def signin(request):
     if request.method == "POST":
         username=request.POST.get('email')
@@ -20,23 +20,24 @@ def signin(request):
     return render(request, 'authentication/signin.html')
 
 def signup(request):
+    print(request.method)
     if request.method == "POST":
-        email=request.POST.get('email')
-        aadhar=request.POST.get('aadharnumber')
         pass1=request.POST.get('pass1')
         pass2=request.POST.get('pass2')
+        print("password",pass1,pass2)
         if pass1!=pass2:
-            messages.error(request, "Passwords do not match")
-            return redirect('/signup/')
+            return render(request, 'authentication/signup.html',{"massage":"password must be same"})
         try:
-            newuser=usersdata(email=email,aadharnumber=aadhar,password=pass1)
-            newuser.save()
-            messages.success(request, "Successfully created account")
-            return redirect('/signin/')
+            fname=request.POST.get('fname')
+            dob=request.POST.get('dob')
+            email=request.POST.get('email')
+            newfarmer=farmerdata(fname=fname,dob=dob,email=email,password=pass1)
+            newfarmer.save()
+            return redirect(request, 'authentication/signin.html')
         except IntegrityError:
-            messages.error(request, "Email already exists")
-            return redirect('/signup/')
+            return render(request, 'authentication/signup.html',{"massage":"email is already registered with us"})
         
+    print("insignup function")
     return render(request, 'authentication/signup.html')
 
 def signout(request):
