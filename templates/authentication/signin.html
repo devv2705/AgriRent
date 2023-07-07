@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <title>Farmer_Project</title>
+    <style>
+        #left {
+            height: 100vh;
+            background-color: #e9edc9;
+            background-image: url("https://i.pinimg.com/736x/76/3e/3d/763e3dc920148f8381e82d14a8e3410d.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        #right {
+            height: 100vh;
+            background-color: #d4a373;
+        }
+
+        #form {
+            text-align: center;
+            margin-top: 50%;
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="row">
+
+        <div class="col-md-6 " id="left">
+
+            <!-- <img id="img1" src="https://i.pinimg.com/736x/76/3e/3d/763e3dc920148f8381e82d14a8e3410d.jpg" alt="farmer" class="img-fluid" > -->
+
+
+        </div>
+        <div class="col-md-6 " id="right">
+            <form action="" id="form">
+            {% csrf_token %}
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="email" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Username</label>
+                </div>
+                <div class="form-floating">
+                    <input type="password" class="form-control" name="pass" id="floatingPassword" placeholder="Password">
+                    <label for="floatingPassword">Password</label>
+                </div>
+                <br><br>
+                <button class="btn btn-primary"><a style="text-decoration: none; color: white;"
+                        href="home.html">Login</a></button>
+                <p>don't have account? <a href="/signup">sign up</a></p>
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+</body>
+
+</html>
