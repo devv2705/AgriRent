@@ -1,27 +1,27 @@
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.db import IntegrityError
-from django.contrib.auth import authenticate , login , logout
 from .models import farmerdata
 def signin(request):
     if request.method == "POST":
-        e=request.POST.get('email')
-        p=request.POST.get('pass')
-        user=authenticate(request,email=e,password=p)
-
-        print(user)
+        email=request.POST.get('email')
+        password=request.POST.get('password')
+        
+        #check in farmerdata model and authenticate
+        user=farmerdata.objects.filter(email=email,password=password).first()
         if user is not None:
-            return render(request,'profile.html',{'email':user.email,'dob':user.dob,'name':user.fname})
+            messages.success(request, "Successfully logged in")
+            return render(request, 'profile.html',{"name":user.fname,"email":user.email,"dob":user.dob})
         else:
-            return render(request,'authentication/signin.html',{'massage':"email/password is incorrect"})
-    return render(request, 'authentication/signin.html')
+            return render(request, 'authentication/signin.html',{"massage":"invalid credentials"})
+    return render(request, 'authentication/signin.html')    
+
 
 def signup(request):
     print(request.method)
     if request.method == "POST":
         pass1=request.POST.get('pass1')
         pass2=request.POST.get('pass2')
-        print("password",pass1,pass2)
         if pass1!=pass2:
             return render(request, 'authentication/signup.html',{"massage":"password must be same"})
         try:
@@ -33,8 +33,6 @@ def signup(request):
             return redirect('/signin/')
         except IntegrityError:
             return render(request, 'authentication/signup.html',{"massage":"email is already registered with us"})
-        
-    print("insignup function")
     return render(request, 'authentication/signup.html')
 
 def signout(request):

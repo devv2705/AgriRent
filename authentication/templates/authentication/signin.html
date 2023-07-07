@@ -295,13 +295,13 @@
 
 
       <div class="fadeIn first">
-        <img src="/logo.png" id="icon" alt="User Icon" />
+        <img src="https://imagetolink.com/ib/u7YRfckarR.png" id="icon" alt="User Icon" />
       </div>
 
       <form action="" id="form" method="post">
         {%csrf_token%}
-        <input type="text" id="email" class="fadeIn second" name="login" placeholder="email" required>
-        <input type="text" id="password" class="fadeIn third" name="login" placeholder="password" required>
+        <input type="text" id="email" class="fadeIn second" name="email" placeholder="email" required>
+        <input type="text" id="password" class="fadeIn third" name="password" placeholder="password" required>
         <p style="color: red;">{{massage}}</p>
         <input type="submit" class="fadeIn fourth" value="Log In">
       </form>
