@@ -25,19 +25,6 @@
       font-weight: 400;
     }
 
-    h2 {
-      text-align: center;
-      font-size: 16px;
-      font-weight: 600;
-      text-transform: uppercase;
-      display: inline-block;
-      margin: 40px 8px 10px 8px;
-      color: #cccccc;
-    }
-
-
-
-
     .wrapper {
       display: flex;
       align-items: center;
@@ -71,19 +58,7 @@
       border-radius: 0 0 10px 10px;
     }
 
-
-    h2.inactive {
-      color: #cccccc;
-    }
-
-    h2.active {
-      color: #0d0d0d;
-      border-bottom: 2px solid #5fbae9;
-    }
-
-    input[type=button],
-    input[type=submit],
-    input[type=reset] {
+    input[type=submit] {
       background-color: #56baed;
       border: none;
       color: white;
@@ -105,15 +80,11 @@
       transition: all 0.3s ease-in-out;
     }
 
-    input[type=button]:hover,
-    input[type=submit]:hover,
-    input[type=reset]:hover {
+    input[type=submit]:hover {
       background-color: #39ace7;
     }
 
-    input[type=button]:active,
-    input[type=submit]:active,
-    input[type=reset]:active {
+    input[type=submit]:active {
       -moz-transform: scale(0.95);
       -webkit-transform: scale(0.95);
       -o-transform: scale(0.95);
@@ -251,11 +222,6 @@
       animation-delay: 0.8s;
     }
 
-    .fadeIn.fourth {
-      -webkit-animation-delay: 1s;
-      -moz-animation-delay: 1s;
-      animation-delay: 1s;
-    }
 
     .underlineHover:after {
       display: block;
@@ -272,9 +238,16 @@
       color: #0d0d0d;
     }
 
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
     .underlineHover:hover:after {
       width: 100%;
     }
+
     *:focus {
       outline: none;
     }
@@ -286,31 +259,33 @@
 </head>
 
 <body>
-
-
   <div class="wrapper fadeInDown">
     <div id="formContent">
-
-
       <div class="fadeIn first">
         <img src="https://imagetolink.com/ib/u7YRfckarR.png" id="icon" alt="User Icon" />
       </div>
-
       <form action="" id="form" method="post">
         {%csrf_token%}
-        <input type="email" id="email" class="design fadeIn second" name="email" placeholder="email" required>
-        <input type="password" id="password" class="design fadeIn third" name="password" placeholder="password" required>
+        <input value="{{ email }}" type="email" id="email" class="design fadeIn second" name="email" placeholder="Email"
+          readonly><br>
+        <!-- <input type="number" id="otp" class="design fadeIn second" name="otp" placeholder="Enter OTP" required maxlength="6" minlength="6"> -->
+        <!-- input length must be 6 in above command -->
+        <input type="number" id="otp" ap class="design fadeIn second" name="otp" placeholder="Enter 6 digit OTP">
         <p style="color: red;">{{message}}</p>
-        <input type="submit" class="fadeIn fourth" value="Log In">
+        <input type="submit" class="fadeIn third" value="Log In">
       </form>
-      <div id="formFooter">
-        <a class="underlineHover" href="#" style="text-decoration: none;">Forgot Password?</a>
-        <br>
-        <p>don't have account? <a class="underlineHover" href="/signup" style="text-decoration: none;">sign up</a></p>
-      </div>
-
     </div>
   </div>
 </body>
 
 </html>
+
+<script>
+  document.getElementById('otp').addEventListener('input', function () {
+    let value = this.value;
+    if (value.length > 6) {
+      value = value.slice(0, 6); // Truncate to 6 digits
+    }
+    this.value = value;
+  });
+</script>

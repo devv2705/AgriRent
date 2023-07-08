@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import farmerdata
+from .models import farmer
 # Register your models here.
 
-admin.site.register(farmerdata)
+admin.site.register(farmer)
