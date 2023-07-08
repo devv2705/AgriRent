@@ -9,10 +9,6 @@
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <style>
-    html {
-      background-color: #56baed;
-    }
-
     body {
       font-family: "Poppins", sans-serif;
       height: 100vh;
@@ -34,9 +30,6 @@
       margin: 40px 8px 10px 8px;
       color: #cccccc;
     }
-
-
-
 
     .wrapper {
       display: flex;
@@ -151,6 +144,7 @@
       color: #cccccc;
     }
 
+
     .fadeInDown {
       -webkit-animation-name: fadeInDown;
       animation-name: fadeInDown;
@@ -257,6 +251,7 @@
       animation-delay: 1s;
     }
 
+
     .underlineHover:after {
       display: block;
       left: 0;
@@ -275,6 +270,7 @@
     .underlineHover:hover:after {
       width: 100%;
     }
+
     *:focus {
       outline: none;
     }
@@ -286,28 +282,23 @@
 </head>
 
 <body>
-
-
   <div class="wrapper fadeInDown">
     <div id="formContent">
-
-
       <div class="fadeIn first">
-        <!-- <img src="https://imagetolink.com/ib/u7YRfckarR.png" id="icon" alt="User Icon" /> -->
-        <img src="/images/logo.png" id="icon" alt="User Icon" />
+        <img src="/static/authentication/images/logo.png" id="icon" alt="User Icon" />
       </div>
-
       <form action="" id="form" method="post">
         {%csrf_token%}
-        <input type="email" id="email" class="design fadeIn second" name="email" placeholder="email" required>
-        <input type="password" id="password" class="design fadeIn third" name="password" placeholder="password" required>
+        <input type="text" id="fname" class="design fadeIn second" name="fname" placeholder="Full Name" required>
+        <input style="text-transform: uppercase;color: #757575;" type="date" id="dob" class="design fadeIn second" name="dob" required><br>
+        <input type="email" id="email" class="design fadeIn second" name="email" placeholder="Email" required><br>
+        <input type="password" id="pass1" class="design fadeIn third" name="pass1" placeholder="Passowrd" required><br>
+        <input type="password" id="pass2" class="design fadeIn third" name="pass2" placeholder="Retype Passowrd" required><br>
         <p style="color: red;">{{message}}</p>
-        <input type="submit" class="fadeIn fourth" value="Log In">
+        <input type="submit" class="fadeIn fourth" value="Sign up">
       </form>
       <div id="formFooter">
-        <a class="underlineHover" href="#" style="text-decoration: none;">Forgot Password?</a>
-        <br>
-        <p>don't have account? <a class="underlineHover" href="/signup" style="text-decoration: none;">sign up</a></p>
+        <p>already have account? <a class="underlineHover" href="/signin" style="text-decoration: none;">sign in</a></p>
       </div>
 
     </div>
