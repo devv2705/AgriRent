@@ -276,16 +276,16 @@
       </form>
     </div>
   </div>
+  <script>
+    document.getElementById('otp').addEventListener('input', function () {
+      let value = this.value;
+      if (value.length > 6) {
+        value = value.slice(0, 6); // Truncate to 6 digits
+      }
+      this.value = value;
+    });
+  </script>
 </body>
 
 </html>
 
-<script>
-  document.getElementById('otp').addEventListener('input', function () {
-    let value = this.value;
-    if (value.length > 6) {
-      value = value.slice(0, 6); // Truncate to 6 digits
-    }
-    this.value = value;
-  });
-</script>
