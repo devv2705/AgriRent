@@ -33,7 +33,7 @@ def signin(request):
         password=request.POST.get('password')
         user=farmer.objects.filter(email=email,password=password).first()
         if user is not None:
-            messages.success(request, "Successfully logged in")
+            request.session['currentfarmer']=user.email
             return render(request, 'profile.html',{"name":user.fname,"email":user.email,"dob":user.dob})
         else:
             return render(request, 'authentication/signin.html',{"message":"invalid credentials"})
@@ -78,6 +78,10 @@ def verify_otp(request):
                                                   email=request.session['newfarmer']['email'],
                                                   password=request.session['newfarmer']['password'])
                 newfarmer.save()
+                request.session['currentfarmer'] = newfarmer[newfarmer.email]
+                del request.session['otp']
+                del request.session['newfarmer']
+                del request.session['signup_attempts']
                 return render(request,'profile.html',{"name":newfarmer.fname,"email":newfarmer.email,"dob":newfarmer.dob})
             except IntegrityError:
                 messages.error(request, "unable to create account")
@@ -85,9 +89,12 @@ def verify_otp(request):
         else:
             request.session['signup_attempts'] += 1
             if request.session['signup_attempts'] == 3:
+                del request.session['otp']
+                del request.session['newfarmer']
+                del request.session['signup_attempts']
                 return render(request, 'authentication/signup.html', {"message": "you have exceeded otp attempts"})   
             return render(request, 'authentication/otp.html', {"email": request.session['newfarmer']['email'],
                                                                 "message": "Invalid otp"})
     return render(request, 'authentication/otp.html', {"email": request.session['newfarmer']['email']})
-def home(request):
+def main(request):
     return render(request, 'home.html')
