@@ -165,14 +165,15 @@
                     <p>
                         Price/day : {{i.equipment_price}}
                     </p>
-                    
+
                     <form action="" id="form" method="post">
                         {% csrf_token %}
                         <input type="hidden" name="equipment_id" value="{{ i.equipment_id }}">
                         <button type="submit" class="btn btn-primary" style="margin-left: 30%;">Details</button>
                     </form>
                 </div>
-            </
+            </div>
+            <br>
             {% endfor %}
 
 

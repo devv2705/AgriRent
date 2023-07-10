@@ -10,7 +10,7 @@ def search(request):
     if not request.session.has_key('currentfarmer'):
         return redirect('/signin')
     if request.method == "POST":
-        if 'eq' in request.POST:
+        if 'equ' in request.POST:
             name = request.POST.get('equ')
             pincode = request.POST.get('pincode')
             print(name, pincode)
@@ -19,10 +19,6 @@ def search(request):
         elif 'equipment_id' in request.POST:
             return redirect('/eid='+request.POST.get('equipment_id'))
     return render(request, 'home/buy.html', {})
-
-def equipment_details(request, equipment_id):
-    eq = shared_equipment.objects.filter(equipment_id=equipment_id).first()
-    return render(request, 'home/equipment_details.html', {'equipment':eq})
 
 def takenequipment(request):
     if not request.session.has_key('currentfarmer'):
