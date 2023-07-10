@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <title>Give item for rent</title>
+    <style>
+
+        #info ul {
+            padding-left: 20%;
+            padding-top: 50%;
+            font-size: 1.5em;
+            color: white;
+        }
+
+        ul :hover {
+            color:green ;
+        }
+
+        #info {
+            background-color: rgb(255, 255, 255);
+            height: 100vh;
+        }
+
+
+        a {
+            text-decoration: none;
+            font-size: 22px;
+            color: black;
+        }
+        ul{
+            list-style-type: none;
+        }
+        #add{
+            margin-left: 45%;
+            margin-top: 12%;
+            height: 50%;
+        }
+        .form-control{
+            width: 95%;
+        }
+        
+        .form{
+        
+            padding-left: 10%;
+            padding-top: 5%;
+            height: 30vh;
+        }
+        .logo{
+            padding-left: 18%;
+        }
+        .col-md-9{
+            background-color: aliceblue;
+        }
+        p{
+            margin-left: 30%;
+            margin-top: 7%;
+        }
+        #imgbox{
+            justify-content: center;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-left: 1%;
+        }
+        #img{
+            height: 300px;
+             width: 300px;
+             border: 2px solid black;
+             border-radius: 10px;
+             margin-top: 5%;
+             margin-bottom: 5%;
+        }
+        #detail{
+            border: 2px solid black;
+            margin-left: 3%;
+            margin-right: 3%;
+            background-color: white;
+            box-shadow: 2px 2px 2px black;
+        
+        }
+        
+    </style>
+</head>
+<body>
+    
+    <section class="row">
+        <div class="col-md-3" id="info">
+            
+                <a href="#" class="logo"><img src="https://imagetolink.com/ib/u7YRfckarR.png"
+                        alt=""></a>   
+                        
+                <ul>
+                    <li><a class="operation" href="#"><img src="https://cdn-icons-png.flaticon.com/128/1019/1019709.png" alt="" style="height: 10%;width: 10%;">&nbsp;Buy</a></li>
+                    <li><a class="operation" href="#"><img src="https://cdn-icons-png.flaticon.com/128/9685/9685379.png" alt="" style="height: 10%;width: 10%;">&nbsp;Sell</a></li>
+                    <li><a class="operation" href="#"><img src="https://cdn-icons-png.flaticon.com/128/1112/1112402.png" alt="" style="height: 10%;width: 10%;">&nbsp;My Equipments</a></li>
+                    <li><a class="operation" href="#"><img src="https://cdn-icons-png.flaticon.com/128/3503/3503786.png" alt="" style="height: 10%;width: 10%;">&nbsp;History</a></li>
+                </ul>
+            </div>
+        <div class="col-md-9">
+    <form class="form">
+        <div class="row">
+        <div class="col-md-4">
+            <label for="equ" class="form-label">Equipment</label>
+           <select name="" id="equ" class="form-control" required>
+            <option value="" selected>Equipments</option>
+            <option value="">tractor</option>
+            <option value="">harvestor</option>
+           </select>
+          </div>
+          <div class="col-md-4">
+            <label for="pincode" class="form-label">Pincode</label>
+            <input type="number" class="form-control" id="pincode">
+          </div>
+          <div class="col-md-4">
+            <button type="submit" class="btn btn-primary" id="add">Search</button>
+            
+          </div>
+        
+       
+    </div>
+      </form>
+
+    <div class="row" id="detail">
+        <div class="col-md-4" id="imgbox">
+            <img id="img" src="data:image/jpeg;base64,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"  alt="">
+        </div>
+        <div class="col-md-5">
+
+            <p>
+             Name : XYZ
+            </p>
+            <p>
+             Company : ABC
+            </p>
+            <p>
+             Modal : UVW
+            </p>
+            <p>
+             City : BOTAD
+            </p>
+            <p>
+             Price/day : 100 Rs
+            </p>
+            <button type="submit" class="btn btn-primary" style="margin-left: 30%;" >Details</button>
+
+        </div>
+    </div>
+
+
+    </div>
+    </section>
+    <script>
+        document.getElementById('pincode').addEventListener('input', function () {
+          let value = this.value;
+          if (value.length > 6) {
+            value = value.slice(0, 6); // Truncate to 6 digits
+          }
+          this.value = value;
+        });
+      </script>
+</body>
+</html>
