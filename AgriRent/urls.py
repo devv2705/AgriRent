@@ -23,5 +23,6 @@ from django.urls import path,include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('authentication.urls')),
-    path('',render(request,'home.html')),
+    path('',include('home.urls')),
+    path('', lambda request: render(request, 'main.html'), name='home'),
 ]

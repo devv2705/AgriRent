@@ -262,7 +262,7 @@
   <div class="wrapper fadeInDown">
     <div id="formContent">
       <div class="fadeIn first">
-        <img src="/static/authentication/images/logo.png" id="icon" alt="User Icon" />
+        <img src="https://imagetolink.com/ib/u7YRfckarR.png" id="icon" alt="User Icon" />
       </div>
       <form action="" id="form" method="post">
         {%csrf_token%}
@@ -276,16 +276,16 @@
       </form>
     </div>
   </div>
+  <script>
+    document.getElementById('otp').addEventListener('input', function () {
+      let value = this.value;
+      if (value.length > 6) {
+        value = value.slice(0, 6); // Truncate to 6 digits
+      }
+      this.value = value;
+    });
+  </script>
 </body>
 
 </html>
 
-<script>
-  document.getElementById('otp').addEventListener('input', function () {
-    let value = this.value;
-    if (value.length > 6) {
-      value = value.slice(0, 6); // Truncate to 6 digits
-    }
-    this.value = value;
-  });
-</script>

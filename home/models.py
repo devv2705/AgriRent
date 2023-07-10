@@ -1,7 +1,6 @@
 from django.db import models
 from authentication.models import farmer
 
-
 class shared_equipment(models.Model):
     farmer = models.ForeignKey(farmer, on_delete=models.CASCADE)
     equipment = models.CharField(max_length=100)
@@ -17,18 +16,18 @@ class shared_equipment(models.Model):
     equipment_time = models.TimeField(auto_now_add=True)
     no_of_equipment = models.IntegerField()
 
-#     def __str__(self):
-#         return self.shared_equipment
+    def __str__(self):
+        return self.shared_equipment
     
-#     class Meta:
-#         verbose_name_plural = 'Shared Equipment'
+    class Meta:
+        verbose_name_plural = 'Shared Equipment'
 
 class taken_equipment(models.Model):
-    taken_by = models.ForeignKey(farmer, on_delete=models.CASCADE)
-    taken_from = models.ForeignKey(farmer, on_delete=models.CASCADE)
+    taken_by = models.ForeignKey(farmer, on_delete=models.CASCADE,related_name='taken_by')
+    taken_from = models.ForeignKey(farmer, on_delete=models.CASCADE,related_name='taken_from')
     def __str__(self):
         return self.taken_equipment
     
-#     class Meta:
-#         verbose_name_plural = 'Taken Equipment'
+    class Meta:
+        verbose_name_plural = 'Taken Equipment'
     
