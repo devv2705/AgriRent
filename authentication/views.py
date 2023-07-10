@@ -78,6 +78,7 @@ def verify_otp(request):
                                                   email=request.session['newfarmer']['email'],
                                                   password=request.session['newfarmer']['password'])
                 newfarmer.save()
+                
                 request.session['currentfarmer'] = newfarmer[newfarmer.email]
                 del request.session['otp']
                 del request.session['newfarmer']
@@ -96,5 +97,4 @@ def verify_otp(request):
             return render(request, 'authentication/otp.html', {"email": request.session['newfarmer']['email'],
                                                                 "message": "Invalid otp"})
     return render(request, 'authentication/otp.html', {"email": request.session['newfarmer']['email']})
-def main(request):
-    return render(request, 'home.html')
+

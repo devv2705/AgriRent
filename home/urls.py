@@ -9,4 +9,5 @@ urlpatterns = [
     path('ShareEquipment/',views.shareequipment),
     path('search/',views.search),
     path('rentequipment',views.rentequipment),
+    path('abc.com/e_id=<str:equipment_id>/', views.equipment_details),
 ]
