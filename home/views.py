@@ -20,8 +20,8 @@ def search(request):
         return render(request, 'search.html', {'all_equipment':all_equipment})
     return render(request, 'search.html', {})
 
-def rentequipment(request):
-    return render(request, 'rentequipment.html', {})
+# def rentequipment(request):
+#     return render(request, 'rentequipment.html', {})
 
 def shareequipment(request):
     if request.method == "POST":

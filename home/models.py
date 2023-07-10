@@ -17,11 +17,11 @@ class shared_equipment(models.Model):
     equipment_time = models.TimeField(auto_now_add=True)
     no_of_equipment = models.IntegerField()
 
-    def __str__(self):
-        return self.shared_equipment
+#     def __str__(self):
+#         return self.shared_equipment
     
-    class Meta:
-        verbose_name_plural = 'Shared Equipment'
+#     class Meta:
+#         verbose_name_plural = 'Shared Equipment'
 
 class taken_equipment(models.Model):
     taken_by = models.ForeignKey(farmer, on_delete=models.CASCADE)
@@ -29,6 +29,6 @@ class taken_equipment(models.Model):
     def __str__(self):
         return self.taken_equipment
     
-    class Meta:
-        verbose_name_plural = 'Taken Equipment'
+#     class Meta:
+#         verbose_name_plural = 'Taken Equipment'
     
