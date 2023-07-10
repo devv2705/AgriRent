@@ -1,12 +1,14 @@
 from django.urls import path
 from . import views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
-    # path('signin/', views.signin),
-    # path('signup/', views.signup),
-    # path('verify_otp/', views.verify_otp),
-    path("home/",views.home),
-    path('ShareEquipment/',views.shareequipment),
-    path('search/',views.search),
-    path('abc.com/e_id=<str:equipment_id>/', views.equipment_details),
+    path('sell/',views.shareequipment),
+    path('signout/',views.signout),
+    path('buy/',views.search),
+    path('eid=<str:equipment_id>/', views.equipment_details),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

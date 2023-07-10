@@ -34,7 +34,7 @@ def signin(request):
         user=farmer.objects.filter(email=email,password=password).first()
         if user is not None:
             request.session['currentfarmer']=user.email
-            return render(request, 'profile.html',{"name":user.fname,"email":user.email,"dob":user.dob})
+            return render(request, 'home/user.html',{"name":user.fname,"email":user.email,"dob":user.dob})
         else:
             return render(request, 'authentication/signin.html',{"message":"invalid credentials"})
     return render(request, 'authentication/signin.html')    
@@ -78,8 +78,7 @@ def verify_otp(request):
                                                   email=request.session['newfarmer']['email'],
                                                   password=request.session['newfarmer']['password'])
                 newfarmer.save()
-                
-                request.session['currentfarmer'] = newfarmer[newfarmer.email]
+                request.session['currentfarmer'] = newfarmer.email
                 del request.session['otp']
                 del request.session['newfarmer']
                 del request.session['signup_attempts']

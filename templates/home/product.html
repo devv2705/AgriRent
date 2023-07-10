@@ -99,34 +99,33 @@
         <div class="col-md-9">
     
         <div class="row" id="imgbox">
-            <img id="img" src="https://images.unsplash.com/photo-1614977645540-7abd88ba8e56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dHJhY3RvcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60"  "  alt="">
+            <!-- <img id="img" src="https://images.unsplash.com/photo-1614977645540-7abd88ba8e56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dHJhY3RvcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60"  alt=""> -->
+            <img id="img" src="{{eq.equipment_image.url}}" alt="">
         </div>
         <div class="row">
-            
-
                 <p>
-                 Equipment Name : XYZ
+                 Equipment Name : {{eq.equipment}}
                 </p>
                 <p>
-                 Company : ABC
+                 Company : {{eq.equipment_company}}
                 </p>
                 <p>
-                 Modal : UVW
+                 Modal : {{eq.equipment_model}}
                 </p>
                 <p>
-                 City : BOTAD
+                 City : {{eq.euipment_pincode}}
                 </p>
                 <p>
-                 Price/day : 100 Rs
+                 Price/day : {{eq.equipment_price}}
                 </p>
                 <p>
-                 Farmer Name : Dev
+                 Farmer Name : {{eq.farmer.fname}}
                 </p>
                 <p>
-                 Contact Number : 9328761189
+                 Contact Number : {{eq.equipment_contact}}
                 </p>                
                 <p style="align-content: flex-start ;display: flex;width: 100vh;">
-                    Equipment Discription :Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus eaque, reiciendis facere officia atque fugit cupiditate, assumenda alias magni libero quae earum ab. Dolore explicabo ab minima itaque ut nesciunt!
+                    Equipment Discription : {{eq.equipment_description}}
                 </p>
     
             

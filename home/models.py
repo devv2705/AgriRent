@@ -4,8 +4,8 @@ from authentication.models import farmer
 class shared_equipment(models.Model):
     farmer = models.ForeignKey(farmer, on_delete=models.CASCADE)
     equipment = models.CharField(max_length=100)
-    equipment_company = models.CharField(max_length=100,blank=True)
-    equipment_model = models.CharField(max_length=100,blank=True)
+    equipment_company = models.CharField(max_length=100,blank=True,null=True)
+    equipment_model = models.CharField(max_length=100,blank=True,null=True)
     equipment_id = models.CharField(max_length=100)
     equipment_description = models.CharField(max_length=100,blank=True)
     equipment_price = models.IntegerField()
@@ -17,7 +17,7 @@ class shared_equipment(models.Model):
     no_of_equipment = models.IntegerField()
 
     def __str__(self):
-        return self.shared_equipment
+        return self.equipment
     
     class Meta:
         verbose_name_plural = 'Shared Equipment'
