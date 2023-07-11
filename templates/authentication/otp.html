@@ -268,8 +268,6 @@
         {%csrf_token%}
         <input value="{{ email }}" type="email" id="email" class="design fadeIn second" name="email" placeholder="Email"
           readonly><br>
-        <!-- <input type="number" id="otp" class="design fadeIn second" name="otp" placeholder="Enter OTP" required maxlength="6" minlength="6"> -->
-        <!-- input length must be 6 in above command -->
         <input type="number" id="otp" ap class="design fadeIn second" name="otp" placeholder="Enter 6 digit OTP">
         <p style="color: red;">{{message}}</p>
         <input type="submit" class="fadeIn third" value="Log In">

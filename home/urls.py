@@ -5,6 +5,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('sell/',views.shareequipment),
+    path('profile/',views.profile),
     path('signout/',views.signout),
     path('buy/',views.search),
     path('eid=<str:equipment_id>/', views.equipment_details),

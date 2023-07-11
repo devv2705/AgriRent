@@ -8,6 +8,10 @@ class farmer(models.Model):
     password=models.CharField(max_length=100)
     otp_chance=models.IntegerField(default=3)
     Created=models.DateTimeField(auto_now_add=True)
+    pincode = models.IntegerField(blank=True,null=True)
+    village = models.CharField(max_length=100,blank=True)
+    mobile = models.IntegerField(blank=True,null=True)
+    
     
     def __str__(self):
         return self.email

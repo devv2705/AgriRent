@@ -59,17 +59,14 @@
             background-color: rgb(146, 210, 174);
             height: 100vh;
         }
-        .card{
+
+        .card {
             text-align: center;
             margin-left: 50vh;
             margin-top: 7vh;
         }
-        .card h3{
-            
-        }
 
-      
-        
+        .card h3 {}
     </style>
 </head>
 
@@ -77,14 +74,15 @@
     <section class="row">
         <div class="col-md-3">
             <figure>
-            <a href="#" class="logo"><img src="https://imagetolink.com/ib/u7YRfckarR.png" alt=""></a>
-        </figure>
+                <a href="#" class="logo"><img src="https://imagetolink.com/ib/u7YRfckarR.png" alt=""></a>
+            </figure>
             <ul>
                 <li><a class="operation" href="/buy/"><img src="https://cdn-icons-png.flaticon.com/128/1019/1019709.png"
                             alt="" style="height: 10%;width: 10%;">&nbsp;Buy</a></li>
-                <li><a class="operation" href="#"><img src="https://cdn-icons-png.flaticon.com/128/9685/9685379.png"
-                            alt="" style="height: 10%;width: 10%;">&nbsp;Sell</a></li>
-                <li><a class="operation" href="#"><img src="https://cdn-icons-png.flaticon.com/128/1112/1112402.png"
+                <li><a class="operation" href="/sell/"><img
+                            src="https://cdn-icons-png.flaticon.com/128/9685/9685379.png" alt=""
+                            style="height: 10%;width: 10%;">&nbsp;Sell</a></li>
+                <li><a class="operation" href="/my/"><img src="https://cdn-icons-png.flaticon.com/128/1112/1112402.png"
                             alt="" style="height: 10%;width: 10%;">&nbsp;My Equipments</a></li>
                 <li><a class="operation" href="#"><img src="https://cdn-icons-png.flaticon.com/128/3503/3503786.png"
                             alt="" style="height: 10%;width: 10%;">&nbsp;History</a></li>
@@ -95,7 +93,7 @@
                 <li><a class="operation" href="#"><img
                             src="https://em-content.zobj.net/thumbs/240/apple/354/gear_2699-fe0f.png" alt=""
                             style="height: 10%;width: 10%;">&nbsp;Settings</a></li>
-                <li style="padding-right: 45px;"><a class="operation" href="#"><img
+                <li style="padding-right: 45px;"><a class="operation" href="/signout/"><img
                             src="https://t4.ftcdn.net/jpg/01/09/46/77/240_F_109467767_JwzMoMf9EMEaPedIfwXIDquzwjENZQjj.jpg"
                             alt="" style="height: 12%;width: 12%;">&nbsp;Log Out</a></li>
             </ul>
@@ -103,21 +101,23 @@
         <div class="col-md-9">
 
             <div class="card" style="width: 20rem;">
-                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" class="card-img-top" alt="user">
-                
-                  <h2  style="margin-top: 50px;"> Dev Prajapati</h2>
-                <ul  class="list-group list-group-flush">
-                  <li class="list-group-item">pd2752003@gmail.com</li>
-                  <li class="list-group-item">27-05-2003</li>
-                  <li class="list-group-item">Gujarat</li>
+                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                    class="card-img-top" alt="user">
+
+                <h3 style="margin-top: 50px;">{{farmer.fname}}</h3>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{farmer.email}}</li>
+                    <li class="list-group-item">{{farmer.dob}}</li>
+                    <li class="list-group-item">{{farmer.village}}</li>
+                    <li class="list-group-item">{{farmer.mobile}}</li>
                 </ul>
                 <div class="card-body">
-                  
+
                 </div>
-              </div>
-         
-               
             </div>
+
+
+        </div>
 
         </div>
     </section>
