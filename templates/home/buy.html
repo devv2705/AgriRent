@@ -57,7 +57,7 @@
         }
 
         .col-md-9 {
-            background-color: aliceblue;
+            background-color: rgb(146, 210, 174);
         }
 
         p {
@@ -70,7 +70,6 @@
             display: flex;
             align-items: center;
             flex-wrap: wrap;
-            margin-left: 1%;
         }
 
         #img {
@@ -83,13 +82,16 @@
         }
 
         #detail {
-            border: 2px solid black;
             margin-left: 3%;
             margin-right: 3%;
-            background-color: white;
-            box-shadow: 2px 2px 2px black;
-
+            border-radius: 10px 10px 10px 10px;
+            background: #fff;
+            position: relative;
+            padding: 0px;
+            box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+            text-align: center;
         }
+
     </style>
 </head>
 
@@ -147,7 +149,7 @@
             {% for i in eq %}
             <div class="row" id="detail">
                 <div class="col-md-4" id="imgbox">
-                    <img id="img" src="{{i.equipment_image.url}}" alt="">
+                    <img style="object-fit: contain;" id="img" src="{{i.equipment_image.url}}" alt="">
                 </div>
                 <div class="col-md-5">
                     <p>
@@ -168,8 +170,8 @@
 
                     <form action="" id="form" method="post">
                         {% csrf_token %}
-                        <input type="hidden" name="equipment_id" value="{{ i.equipment_id }}">
-                        <button type="submit" class="btn btn-primary" style="margin-left: 30%;">Details</button>
+                        <button value="{{ i.equipment_id }}" type="submit" class="btn btn-primary" style="margin-left: 30%;">Details</button>
+                        <button value="{{ i.equipment_id }}" type="submit" class="btn btn-primary" style="margin-left: 30%;">Share</button>
                     </form>
                 </div>
             </div>
