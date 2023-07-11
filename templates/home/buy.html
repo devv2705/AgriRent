@@ -22,6 +22,7 @@
         #info {
             background-color: rgb(255, 255, 255);
             height: 100vh;
+            position: fixed;
         }
 
 
@@ -58,11 +59,14 @@
 
         .col-md-9 {
             background-color: rgb(146, 210, 174);
+            margin-left: 25%;
+            position: relative;
         }
 
         p {
-            margin-left: 30%;
-            margin-top: 7%;
+            margin-left: 10%;
+            margin-top: 6%;
+            text-align: left;
         }
 
         #imgbox {
@@ -167,7 +171,7 @@
                     <p>
                         Price/day : {{i.price}}
                     </p>
-
+                    
                     <form action="" id="form" method="post">
                         {% csrf_token %}
                         <button value="{{ i.equipment_id }}" type="submit" class="btn btn-primary" style="margin-left: 30%;">Details</button>
