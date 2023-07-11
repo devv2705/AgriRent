@@ -1,14 +1,12 @@
 from django.shortcuts import render,redirect
 from .models import shared_equipment, taken_equipment
 from authentication.models import farmer
-from django.db.models import F
-from django.db.models.functions import Abs
 import random
 import string
 
 def search(request):
     if not request.session.has_key('currentfarmer'):
-        return redirect('/signin')
+        return render(request, 'home/signup.html', {'message':"create account to serach for equipment"})
     if request.method == "POST":
         if 'equ' in request.POST:
             name = request.POST.get('equ')
@@ -30,11 +28,10 @@ def takenequipment(request):
 
 def shareequipment(request):
     if not request.session.has_key('currentfarmer'):
-        return redirect('/signin')
+        return render(request, 'home/signup.html', {'message':"create account to serach for equipment"})
     if request.method == "POST":
         new_equipment = shared_equipment()
         new_equipment.farmer = farmer.objects.filter(email=request.session['currentfarmer']).first()
-        # print(request.session['currentfarmer'])
         new_equipment.equipment = str(request.POST.get('equ'))
         new_equipment.equipment_id = generate_equipment_id(20)    
         new_equipment.equipment_company = str(request.POST.get('company'))
@@ -45,16 +42,6 @@ def shareequipment(request):
         new_equipment.euipment_pincode = request.POST.get('pincode')
         new_equipment.equipment_contact = request.POST.get('num')
         new_equipment.no_of_equipment = request.POST.get('n_eq')
-        # print(type(request.POST.get('equ')),request.POST.get('equ'))
-        # print(type(request.POST.get('company')),request.POST.get('company'))
-        # print(type(request.POST.get('model')),request.POST.get('model'))
-        # print(type(request.POST.get('discription')),request.POST.get('discription'))
-        # print(type(request.POST.get('price')),request.POST.get('price'))
-        # print(type(request.POST.get('image')),request.POST.get('image'))
-        # print(type(request.POST.get('pincode')),request.POST.get('pincode'))
-        # print(type(request.POST.get('num')),request.POST.get('num'))
-        # print(type(request.POST.get('n_eq')),request.POST.get('n_eq'))
-        # print(type(new_equipment),new_equipment.__dict__)
         new_equipment.save()
     return render(request, 'home/sell.html')
 
