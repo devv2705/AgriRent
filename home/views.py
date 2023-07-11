@@ -14,6 +14,7 @@ def search(request):
             pincode = request.POST.get('pincode')
             print(name, pincode)
             all_equipment = shared_equipment.objects.filter(name=name)
+            print(all_equipment)
             return render(request, 'home/buy.html', {'eq':all_equipment})
         elif 'equipment_id' in request.POST:
             return redirect('/eid='+request.POST.get('equipment_id'))
@@ -42,7 +43,7 @@ def shareequipment(request):
         new_equipment = shared_equipment()
         new_equipment.farmer = farmer.objects.filter(email=request.session['currentfarmer']).first()
         new_equipment.name = str(request.POST.get('equ'))
-        new_equipment.id = generate_equipment_id(20)    
+        new_equipment.uid = generate_equipment_id(20)    
         new_equipment.company = str(request.POST.get('company'))
         new_equipment.model = str(request.POST.get('model'))
         new_equipment.description = str(request.POST.get('discription'))
@@ -57,7 +58,7 @@ def shareequipment(request):
 def generate_equipment_id(length):
     characters = string.ascii_uppercase + string.ascii_lowercase + string.digits + string.punctuation
     equipment_id = ''.join(random.choice(characters) for _ in range(length))
-    if shared_equipment.objects.filter(equipment_id=equipment_id).exists():
+    if shared_equipment.objects.filter(uid=equipment_id).exists():
         generate_equipment_id(length)
     return equipment_id
 

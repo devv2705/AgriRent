@@ -149,23 +149,23 @@
             {% for i in eq %}
             <div class="row" id="detail">
                 <div class="col-md-4" id="imgbox">
-                    <img style="object-fit: contain;" id="img" src="{{i.equipment_image.url}}" alt="">
+                    <img style="object-fit: contain;" id="img" src="{{i.image.url}}" alt="">
                 </div>
                 <div class="col-md-5">
                     <p>
-                        Equipment Name : {{i.equipment}}
+                        Equipment Name : {{i.name}}
                     </p>
                     <p>
-                        Company : {{i.equipment_company}}
+                        Company : {{i.company}}
                     </p>
                     <p>
-                        Modal : {{i.equipment_modal}}
+                        Modal : {{i.model}}
                     </p>
                     <p>
-                        City : {{i.euipment_pincode}}
+                        Location : {{i.farmer.village}}
                     </p>
                     <p>
-                        Price/day : {{i.equipment_price}}
+                        Price/day : {{i.price}}
                     </p>
 
                     <form action="" id="form" method="post">
