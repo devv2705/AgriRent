@@ -1,0 +1,91 @@
+#info ul {
+    padding-left: 20%;
+    padding-top: 50%;
+    font-size: 1.5em;
+    color: white;
+}
+
+ul :hover {
+    color: green;
+}
+
+#info {
+    background-color: rgb(255, 255, 255);
+    height: 100vh;
+
+}
+
+
+a {
+    text-decoration: none;
+    font-size: 22px;
+    color: black;
+}
+
+ul {
+    list-style-type: none;
+}
+
+#add {
+    margin-left: 45%;
+}
+
+.form-control {
+    width: 95%;
+}
+
+.form {
+
+    background-color: aliceblue;
+    padding-left: 10%;
+    padding-top: 5%;
+}
+
+.logo {
+    padding-left: 18%;
+}
+.col-md-9{
+    background-color: aliceblue;
+    
+  
+}
+.card {
+    text-align: center;
+    margin-left: 50vh;
+    margin-top: 7vh;
+}
+p{
+    margin-left: 10%;
+    margin-top: 7%;
+    align-content: flex-start ;
+    display: flex;
+    width: 100vh;
+}
+#imgbox{
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-left: 1%;
+}
+#img{
+    height: 300px;
+     width: 350px;
+     border: 2px solid black;
+     border-radius: 10px;
+     margin-top: 5%;
+     margin-bottom: 5%;
+}
+li {
+    margin: 4%;
+}
+#detail {
+    margin-left: 3%;
+    margin-right: 3%;
+    border-radius: 10px 10px 10px 10px;
+    background: #fff;
+    position: relative;
+    padding: 0px;
+    box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
