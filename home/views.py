@@ -4,6 +4,11 @@ from authentication.models import farmer
 import random
 import string
 
+def editprofile(request):
+    if(request.session=='POST'):
+       return redirect('/editprofile')
+    return render(request,'home/complateProfile.html')
+
 def search(request):
     if not request.session.has_key('currentfarmer'):
         request.session['error'] = "Signin to search for equipment"

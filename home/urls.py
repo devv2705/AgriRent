@@ -9,6 +9,7 @@ urlpatterns = [
     path('signout/',views.signout),
     path('buy/',views.search),
     path('eid=<str:equipment_id>/', views.equipment_details),
+    path('editprofile/',views.editprofile)
 ]
 
 if settings.DEBUG:

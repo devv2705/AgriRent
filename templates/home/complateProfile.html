@@ -64,32 +64,10 @@
 <body>
 
   <section class="row" >
-    <div class="col-md-3" id="info">
-
-      <a href="#" class="logo"><img src="https://imagetolink.com/ib/u7YRfckarR.png" alt=""></a>
-
-      <ul>
-        <li><a class="operation" href="/buy/"><img src="https://cdn-icons-png.flaticon.com/128/1019/1019709.png" alt=""
-              style="height: 10%;width: 10%;">&nbsp;Buy</a></li>
-        <li><a class="operation" href="#"><img src="https://cdn-icons-png.flaticon.com/128/9685/9685379.png" alt=""
-              style="height: 10%;width: 10%;">&nbsp;Sell</a></li>
-        <li><a class="operation" href="#"><img src="https://cdn-icons-png.flaticon.com/128/1112/1112402.png" alt=""
-              style="height: 10%;width: 10%;">&nbsp;My Equipments</a></li>
-        <li><a class="operation" href="#"><img src="https://cdn-icons-png.flaticon.com/128/3503/3503786.png" alt=""
-              style="height: 10%;width: 10%;">&nbsp;History</a></li>
-      </ul>
-
-      
-      <ul id="dev">
-        <li><a class="operation" href="#"><img src="https://em-content.zobj.net/thumbs/240/apple/354/gear_2699-fe0f.png"
-              alt="" style="height: 10%;width: 10%;">&nbsp;Settings</a></li>
-        <li style="padding-right: 45px;"><a class="operation" href="#"><img
-              src="https://t4.ftcdn.net/jpg/01/09/46/77/240_F_109467767_JwzMoMf9EMEaPedIfwXIDquzwjENZQjj.jpg" alt=""
-              style="height: 15%;width: 15%;">&nbsp;Log Out</a></li>
-      </ul>
-    </div>
+    {% include "home/leftpanel.html" %}
     <div class="col-md-9" style="height: auto;">
       <form class="form" action="" id="form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
         <div class="mb-3">
           <label for="name" class="form-label">Name</label>
           <input type="text" class="form-control" name="name" id="name" aria-describedby="emailHelp" readonly>
@@ -134,7 +112,7 @@
         </div>
         <div class="mb-3">
           <label for="address" class="form-label">Address</label>
-          <textarea name="address" class="form-control" id="address" cols="30" rows="5" ></textarea>
+          <textarea name="address" class="form-control" id="address" cols="30" rows="5" id="address" ></textarea>
         </div>
        
         <div class="mb-3">
@@ -145,12 +123,25 @@
           <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
           <label class="form-check-label" for="exampleCheck1">I have check my details</label>
         </div>
-        <button type="submit" class="btn btn-primary" id="add">submit</button>
+        <button type="submit" onclick="pop()" class="btn btn-primary" id="add">submit</button>
       </form>
     </div>
   </section>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
+    function pop(){
+      let x=document.getElementById("dob").value
+      let y=document.getElementById("pincode").value
+      let z=document.getElementById("address").value
+      let w=document.getElementById("image").value
+      if(x =='' || y=='' || z=='' || w==''){
+         alert('fill all information');
+      }
+      else{
+      alert('Your details has successfully saved');
+      
+    }
+    }
     document.getElementById('pincode').addEventListener('input', function () {
       let value = this.value;
       if (value.length > 6) {
