@@ -12,7 +12,7 @@
 
 <body>
 
-  <section class="row">
+  <section class="row" >
     {% include "home/leftpanel.html" %}
     <div class="col-md-9">
       <form class="form" action="" id="form" method="post" enctype="multipart/form-data">
@@ -55,18 +55,18 @@
         </div>
         <div class="mb-3">
           <label for="company" class="form-label">Upload Image</label>
-          <input type="file" class="form-control" accept="image/*" id="image" name="image" >
+          <input type="file" class="form-control" accept="image/*" id="image" name="image">
         </div>
         <div class="mb-3 form-check">
           <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
-          <label class="form-check-label" for="exampleCheck1" >Equipment must be in working condition</label>
+          <label class="form-check-label" for="exampleCheck1">Equipment must be in working condition</label>
         </div>
         <button type="submit" onclick="pop()" class="btn btn-primary" id="add">Apply</button>
       </form>
     </div>
   </section>
   <script>
-    function pop(){
+    function pop() {
       alert("Equipment saved successfully")
     }
     document.getElementById('pincode').addEventListener('input', function () {

@@ -10,10 +10,10 @@ urlpatterns = [
     path('renteq/',views.search),
     path('eid=<str:equipment_id>/', views.equipment_details),
     path('editprofile/',views.editprofile)
-    path('myeq/',views.myequipment),
-    path('chat/',views.chat),
-    path('chat/<str:chat_id>/',views.chat),
-    path('settings/',views.settings),
+    # path('myeq/',views.myequipment),
+    # path('chat/',views.chat),
+    # path('chat/<str:chat_id>/',views.chat),
+    # path('settings/',views.settings),
 ]
 
 if settings.DEBUG:
