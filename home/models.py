@@ -9,7 +9,7 @@ class shared_equipment(models.Model):
     uid = models.CharField(max_length=100)
     description = models.CharField(max_length=100,blank=True)
     price = models.IntegerField()
-    image = models.ImageField(upload_to='shared_equipment_image')
+    image = models.ImageField(upload_to='static/home/eqimages')
     date = models.DateField(auto_now_add=True)
     time = models.TimeField(auto_now_add=True)
     no_of_eq = models.IntegerField()

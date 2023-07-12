@@ -64,23 +64,32 @@
                         Location : {{i.farmer.village}}
                     </p>
                     <p>
-                        Price/day : {{i.price}}
+                        Price/day : {{i.price}}-{{i.uid}}
                     </p>
-                    
+
                     <form action="" id="form" method="post">
                         {% csrf_token %}
-                        <button value="{{ i.equipment_id }}" type="submit" class="btn btn-primary" style="margin-left: 30%;">Details</button>
-                        
+                        <input hidden  type="text" name="uid" id="uid" value="{{i.uid}}">
+                        <button type="submit" class="btn btn-primary" style="margin-left: 30%;">Details</button>
                     </form>
                 </div>
             </div>
             <br>
             {% endfor %}
-
-
         </div>
     </section>
-
+    <script>
+        const selectElement = document.getElementById('equ');
+        const previouslySelectedValue = "{{name}}";
+        if (previouslySelectedValue) {
+            selectElement.value = previouslySelectedValue;
+        }
+        const pincodeInputElement = document.getElementById('pincode');
+        const previouslyEnteredPincode = "{{pincode}}";
+        if (previouslyEnteredPincode) {
+            pincodeInputElement.value = previouslyEnteredPincode;
+        }
+    </script>
 </body>
 
 </html>

@@ -103,14 +103,10 @@ def signup(request):
     print(request.method)
     if request.method == "POST":
         fname=request.POST.get('fname')
-        dob=request.POST.get('dob')
         email=request.POST.get('email')
         pass1=request.POST.get('pass1')
         pass2=request.POST.get('pass2')
-        pincode=request.POST.get('pincode')
         mobile=request.POST.get('mobile')
-        villages=request.POST.get('villages')
-        
         if farmer.objects.filter(email=email).exists():
             return render(request, 'authentication/signup.html',{"message":"email is already registered with us"})
         if pass1!=pass2:
@@ -121,12 +117,9 @@ def signup(request):
             request.session['signup_attempts'] = 0
             request.session['newfarmer']={
                 "fname":fname,
-                "dob":dob,
                 "email":email,
                 "password":pass1,
-                "pincode":pincode,
                 "mobile":mobile,
-                "villages":villages
             
             }
             return redirect('/verify_otp')
@@ -141,12 +134,9 @@ def verify_otp(request):
         if int(otp) == request.session['otp']:
             try:
                 newfarmer = farmer(fname=request.session['newfarmer']['fname'],
-                                    dob=request.session['newfarmer']['dob'],
                                     email=request.session['newfarmer']['email'],
                                     password=request.session['newfarmer']['password'],
-                                    pincode=request.session['newfarmer']['pincode'],
-                                    mobile=request.session['newfarmer']['mobile'],
-                                    village=request.session['newfarmer']['villages'])
+                                    mobile=request.session['newfarmer']['mobile'])
                 newfarmer.save()
                 request.session['currentfarmer'] = newfarmer.email
                 del request.session['otp']

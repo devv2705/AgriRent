@@ -12,30 +12,32 @@
 
 <body>
 
-  <section class="row" >
+  <section class="row">
     {% include "home/leftpanel.html" %}
     <div class="col-md-9">
       <form class="form" action="" id="form" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="mb-3">
           <label for="name" class="form-label">Name</label>
-          <input type="text" class="form-control" name="name" id="name" aria-describedby="emailHelp" readonly>
+          <input value="{{f.fname}}" type="text" class="form-control" name="name" id="name"
+            aria-describedby="emailHelp">
         </div>
         <div class="mb-3">
           <label for="number" class="form-label">Mobile Number</label>
-          <input type="number" name="model" class="form-control" id="number" aria-describedby="emailHelp" readonly>
+          <input value="{{f.mobile}}" type="number" name="model" class="form-control" id="number"
+            aria-describedby="emailHelp" readonly>
         </div>
         <div class="mb-3">
           <label for="mail" class="form-label">Email</label>
-          <input type="email" name="company" class="form-control" id="mail" readonly>
+          <input value="{{f.email}}" type="email" name="company" class="form-control" id="mail" readonly>
         </div>
         <div class="mb-3">
           <label for="dob" class="form-label">Date of Birth</label>
-          <input type="date" class="form-control" name="n_eq" id="dob" required>
+          <input value="{{f.dob}}" type="date" class="form-control" name="dob" id="dob" required>
         </div>
         <div class="mb-3">
           <label for="pincode" class="form-label">Pincode</label>
-          <input type="number" class="form-control" name="pincode" id="pincode" required>
+          <input value="{{f.pincode}}" type="number" class="form-control" name="pincode" id="pincode" required>
         </div>
         <div id="addressFields" style="display: none;">
           <div class="mb-3">
@@ -61,9 +63,8 @@
         </div>
         <div class="mb-3">
           <label for="address" class="form-label">Address</label>
-          <textarea name="address" class="form-control" id="address" cols="30" rows="5" id="address" ></textarea>
+          <textarea required name="address" class="form-control" id="address" cols="30" rows="2" id="address"></textarea>
         </div>
-       
         <div class="mb-3">
           <label for="company" class="form-label">Upload profile Image</label>
           <input type="file" class="form-control" accept=".png,.jpg,.jpeg" id="image" name="image" required>
@@ -78,18 +79,24 @@
   </section>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
-    function pop(){
-      let x=document.getElementById("dob").value
-      let y=document.getElementById("pincode").value
-      let z=document.getElementById("address").value
-      let w=document.getElementById("image").value
-      if(x =='' || y=='' || z=='' || w==''){
-         alert('fill all information');
-      }
-      else{
-      alert('Your details has successfully saved');
-      
+    const selectElement = document.getElementById('villages');
+    const previouslySelectedValue = "{{f.village}}}";
+    if (previouslySelectedValue) {
+      selectElement.value = previouslySelectedValue;
     }
+
+    function pop() {
+      let x = document.getElementById("dob").value
+      let y = document.getElementById("pincode").value
+      let z = document.getElementById("address").value
+      let w = document.getElementById("image").value
+      if (x == '' || y == '' || z == '' || w == '') {
+        alert('fill all information');
+      }
+      else {
+        alert('Your details has successfully saved');
+
+      }
     }
     document.getElementById('pincode').addEventListener('input', function () {
       let value = this.value;
