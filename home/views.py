@@ -4,6 +4,29 @@ from authentication.models import farmer
 import random
 import string
 
+
+def editprofile(request):
+    if(request.session=='POST'):
+       return redirect('/editprofile')
+    return render(request,'home/complateProfile.html')
+
+def settings(request):
+    if not request.session.has_key('currentfarmer'):
+        return redirect('/signin')
+    return render(request,'home/settings.html')
+
+def chat(request):
+    if not request.session.has_key('currentfarmer'):
+        return redirect('/signin')
+    return render(request,'home/chat.html')
+
+def myequipment(request):
+    if not request.session.has_key('currentfarmer'):
+        return redirect('/signin')
+    myeq = shared_equipment.objects.filter(farmer=farmer.objects.filter(email=request.session['currentfarmer']).first())
+    return render(request, 'home/myequipment.html', {'myeq':myeq})
+
+
 def editprofile(request):
     if(request.session=='POST'):
        return redirect('/editprofile')
