@@ -33,6 +33,7 @@ ul {
 
 #add {
     margin-left: 45%;
+    margin-bottom: 3%;
 }
 
 .form-control {
@@ -43,14 +44,20 @@ ul {
     background-color: aliceblue;
     padding-left: 10%;
     padding-top: 5%;
+   
+    
 }
 .logo {
     padding-left: 18%;
 }
-
+body{
+    overflow-x: hidden;
+}
 .col-md-9 {
     background-color: aliceblue;
     overflow-y: scroll;
+    height: 100vh;
+    overflow-x: hidden;
 }
 .col-md-3 {
     position: sticky;
@@ -64,7 +71,7 @@ ul {
 
 .card {
     text-align: center;
-    margin-left: 50vh;
+    margin-left: 45vh;
     margin-top: 7vh;
 }
 
@@ -106,4 +113,5 @@ li {
     padding: 0px;
     box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
     text-align: center;
+    margin-top: 5%;
 }
