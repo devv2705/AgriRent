@@ -91,7 +91,9 @@
       let y = document.getElementById("pincode").value
       let z = document.getElementById("address").value
       let w = document.getElementById("image").value
-      if (x == '' || y == '' || z == '' || w == '') {
+      let block = document.getElementById("villages").value
+      let a = document.getElementById("exampleCheck").value
+      if (x == '' || y == '' || z == '' || w == '' || b == '' || a == '') {
         alert('Please fill in all the information');
       }
       else {

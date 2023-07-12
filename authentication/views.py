@@ -113,7 +113,7 @@ def signup(request):
             return render(request, 'authentication/signup.html',{"message":"email is already registered with us"})
         if pass1!=pass2:
             return render(request, 'authentication/signup.html',{"message":"password must be same"})
-        otp = random.randint(10000, 99999)
+        otp = random.randint(100000, 999999)
         if send_mail(email, otp, 1):
             request.session['otp'] = otp
             request.session['signup_attempts'] = 0
@@ -140,6 +140,7 @@ def verify_otp(request):
                                     password=request.session['newfarmer']['password'],
                                     mobile=request.session['newfarmer']['mobile'])
                 newfarmer.last_login = datetime.datetime.now()
+                newfarmer.p_image = "/static/images/default.jpg"
                 newfarmer.save()
                 request.session['currentfarmer'] = newfarmer.email
                 del request.session['otp']

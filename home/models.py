@@ -13,6 +13,13 @@ class shared_equipment(models.Model):
     date = models.DateField(auto_now_add=True)
     time = models.TimeField(auto_now_add=True)
     no_of_eq = models.IntegerField()
+    mobile = models.IntegerField(blank=True,null=True)
+    pincode = models.IntegerField(blank=True,null=True) 
+    village = models.CharField(max_length=100,blank=True,null=True)
+    city = models.CharField(max_length=100,blank=True,null=True)
+    state = models.CharField(max_length=100,blank=True,null=True)
+    country = models.CharField(max_length=100,blank=True,null=True)
+    
 
     def __str__(self):
         return self.name

@@ -5,25 +5,28 @@ from authentication.models import farmer
 import random
 import string
 
+
 def editprofile(request):
     verify_request(request)
-    if(request.session=='POST'):
+    print(type(farmer.objects.filter(email=request.session['currentfarmer']).first()))
+    if request.method == "POST":
         currentfarmer = farmer.objects.filter(email=request.session['currentfarmer']).first()
-        currentfarmer.fname = request.POST.get('fname')
-        currentfarmer.mobile = request.POST.get('mobile')
+        currentfarmer.fname = request.POST.get('name')
+        currentfarmer.dob = request.POST.get('dob')
         currentfarmer.pincode = request.POST.get('pincode')
         currentfarmer.address = request.POST.get('address')
         currentfarmer.city = request.POST.get('city')
         currentfarmer.state = request.POST.get('state')
-        currentfarmer.country = request.POST.get('country')
-        currentfarmer.p_image = request.POST.get('image')
+        currentfarmer.contry = request.POST.get('country')
+        currentfarmer.village = request.POST.get('village')
+        currentfarmer.p_image = request.FILES.get('image')
         currentfarmer.save()
         return redirect('/profile')
-    return render(request,'home/complateProfile.html')
+    return render(request,'home/complateProfile.html',{'f':farmer.objects.filter(email=request.session['currentfarmer']).first()})
 
 def settings(request):
     verify_request(request)
-    if request.session=="POST":
+    if request.method=="POST":
         currentfarmer = farmer.objects.filter(email=request.session['currentfarmer']).first()
         if request.POST.has_key('delete'):
             currentfarmer.delete()
@@ -55,10 +58,9 @@ def chat(request):
 
 def myequipment(request):
     verify_request(request)
-    # soldeq = shared_equipment.objects.filter(email=request.session['currentfarmer'])
-    # teneq = taken_equipment.objects.filter(email=request.session['currentfarmer'])
-    myeq = shared_equipment.objects.filter(farmer=farmer.objects.filter(email=request.session['currentfarmer']).first())
-    return render(request, 'home/myequipment.html', {'myeq':myeq})
+    sharedeq = shared_equipment.objects.filter(farmer=farmer.objects.filter(email=request.session['currentfarmer']).first())
+    renteq = taken_equipment.objects.filter(farmer=farmer.objects.filter(email=request.session['currentfarmer']).first())
+    return render(request, 'home/myequipment.html', {'sharedeq':sharedeq, 'renteq':renteq})
 
 def search(request):
     verify_request(request)
@@ -91,15 +93,18 @@ def shareequipment(request):
         new_equipment.description = str(request.POST.get('discription'))
         new_equipment.price = int(request.POST.get('price'))
         new_equipment.image = request.FILES.get('image')
-        new_equipment.pincode = request.POST.get('pincode')
-        new_equipment.contact = request.POST.get('num')
+        new_equipment.pincode = int(request.POST.get('pincode'))
+        new_equipment.city = str(request.POST.get('city'))
+        new_equipment.state = str(request.POST.get('state'))
+        new_equipment.country = str(request.POST.get('country'))
+        new_equipment.village = str(request.POST.get('village'))
+        new_equipment.mobile = int(request.POST.get('num'))
         new_equipment.no_of_eq= request.POST.get('n_eq')
         new_equipment.save()
     return render(request, 'home/sell.html')
 
 def generate_equipment_id(length):
-    characters = string.ascii_uppercase + string.ascii_lowercase + string.digits + string.punctuation
-    characters.replace('/', '').replace('?', '')
+    characters = string.ascii_uppercase + string.ascii_lowercase + string.digits
     equipment_id = ''.join(random.choice(characters) for _ in range(length))
     if shared_equipment.objects.filter(uid=equipment_id).exists():
         generate_equipment_id(length)
