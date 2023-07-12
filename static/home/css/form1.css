@@ -4,11 +4,7 @@
     font-size: 1.5em;
     color: white;
 }
-html {
-    background-color: red;
-    overflow-x: hidden;
-    overscroll-behavior-x:contain;
-}
+
 
 ul :hover {
     color: green;
@@ -29,6 +25,7 @@ a {
 
 ul {
     list-style-type: none;
+    padding-top: 10%;
 }
 
 #add {
@@ -63,7 +60,7 @@ body{
     position: sticky;
     top: 0;
     height: 100vh;
-    overflow-y: scroll;
+    
     width: 25%;
     z-index: 1;
   }
@@ -114,4 +111,31 @@ li {
     box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
     text-align: center;
     margin-top: 5%;
+}
+
+#sett{
+    margin-top: 20%;
+    text-align: center;
+    margin-left: 5%;
+}
+#delaccount{
+    margin-top: 10%;
+}
+#new_pass{
+    text-align: center;
+    margin-top: 3%;
+}
+#btn{
+    height: 80px;
+}
+
+#resetpass button:hover{
+    background-color: rgb(169, 255, 169);
+}
+#delaccount button:hover{
+    background-color: rgb(255, 152, 152);
+}
+
+.color:hover{
+    color: black;
 }
