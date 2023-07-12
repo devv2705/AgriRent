@@ -55,7 +55,7 @@
           <div class="mb-3">
             <div id="villagesContainer" style="display: none;">
               <label for="company" class="form-label">Village</label>
-              <select id="villages" disabled required class="form-control">
+              <select name="village" id="villages" disabled required class="form-control">
                 <option value=""></option>
               </select>
             </div>
@@ -63,7 +63,8 @@
         </div>
         <div class="mb-3">
           <label for="address" class="form-label">Address</label>
-          <textarea required name="address" class="form-control" id="address" cols="30" rows="2" id="address"></textarea>
+          <textarea required name="address" class="form-control" id="address" cols="30" rows="2"
+            id="address"></textarea>
         </div>
         <div class="mb-3">
           <label for="company" class="form-label">Upload profile Image</label>
@@ -91,13 +92,13 @@
       let z = document.getElementById("address").value
       let w = document.getElementById("image").value
       if (x == '' || y == '' || z == '' || w == '') {
-        alert('fill all information');
+        alert('Please fill in all the information');
       }
       else {
-        alert('Your details has successfully saved');
-
+        alert('Your details have been successfully saved');
       }
     }
+
     document.getElementById('pincode').addEventListener('input', function () {
       let value = this.value;
       if (value.length > 6) {
@@ -105,6 +106,7 @@
       }
       this.value = value;
     });
+
     $(document).ready(function () {
       var pincodeInput = $('#pincode');
       var cityInput = $('#city');
@@ -147,7 +149,7 @@
 
               villagesSelect.empty().append($('<option>').text('Select a village'));
               villages.forEach(function (village) {
-                villagesSelect.append($('<option>').text(village));
+                villagesSelect.append($('<option>').text(village).val(village));
               });
               villagesSelect.prop('disabled', false);
             } else {
@@ -171,6 +173,7 @@
         villagesContainer.css('display', 'none');
       }
     });
+
   </script>
 </body>
 

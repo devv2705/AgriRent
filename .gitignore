@@ -1,0 +1,7 @@
+static/home/pimages/*
+static/home/eqimages/*
+*.pyc
+*.pyo
+*.db
+*.sqlite3
+

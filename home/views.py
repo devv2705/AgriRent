@@ -5,7 +5,6 @@ from authentication.models import farmer
 import random
 import string
 
-
 def editprofile(request):
     verify_request(request)
     if(request.session=='POST'):
