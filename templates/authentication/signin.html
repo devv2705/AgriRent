@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="/static/authentication/css/form1.css">
+</head>
+
+<body>
+
+
+  <div class="wrapper fadeInDown">
+    <div id="formContent">
+
+
+      <div class="fadeIn first">
+        <img src="/static/authentication/images/logo.png" id="icon" alt="User Icon" />
+      </div>
+
+      <form action="" id="form" method="post">
+        {%csrf_token%}
+        <input type="email" id="email" class="design fadeIn second" name="email" placeholder="email" required>
+        <input type="password" id="password" class="design fadeIn third" name="password" placeholder="password" required>
+        <p style="color: red;">{{message}}</p>
+        <input type="submit" class="fadeIn fourth" value="Log In">
+      </form>
+      <div id="formFooter">
+        <a class="underlineHover" href="/forgotpass" style="text-decoration: none;">Forgot Password?</a>
+        <br>
+        <p>don't have account? <a class="underlineHover" href="/signup" style="text-decoration: none;">sign up</a></p>
+      </div>
+
+    </div>
+  </div>
+</body>
+
+</html>
