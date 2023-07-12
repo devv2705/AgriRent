@@ -58,9 +58,14 @@ def chat(request):
 
 def myequipment(request):
     verify_request(request)
-    sharedeq = shared_equipment.objects.filter(farmer=farmer.objects.filter(email=request.session['currentfarmer']).first())
-    renteq = taken_equipment.objects.filter(farmer=farmer.objects.filter(email=request.session['currentfarmer']).first())
-    return render(request, 'home/myequipment.html', {'sharedeq':sharedeq, 'renteq':renteq})
+    currentfarmer = farmer.objects.filter(email=request.session['currentfarmer']).first()
+    if request.method == "POST":
+        which_eq = request.POST.get('equ')
+        if which_eq=="shared Equipments":
+            return render(request,'home/myeq.html',{'eq':shared_equipment.objects.filter(farmer=currentfarmer), 'which':which_eq})
+        elif which_eq=="rented Equipments":
+            return render(request,'home/myeq.html',{'eq':taken_equipment.objects.filter(taken_by=currentfarmer), 'which':which_eq})
+    return render(request,'home/myeq.html',{'eq':shared_equipment.objects.filter(farmer=currentfarmer)})
 
 def search(request):
     verify_request(request)
