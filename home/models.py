@@ -19,6 +19,7 @@ class shared_equipment(models.Model):
     city = models.CharField(max_length=100,blank=True,null=True)
     state = models.CharField(max_length=100,blank=True,null=True)
     country = models.CharField(max_length=100,blank=True,null=True)
+    address = models.CharField(max_length=100,blank=True,null=True)
     
 
     def __str__(self):

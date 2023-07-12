@@ -100,6 +100,7 @@ def shareequipment(request):
         new_equipment.village = str(request.POST.get('village'))
         new_equipment.mobile = int(request.POST.get('num'))
         new_equipment.no_of_eq= request.POST.get('n_eq')
+        new_equipment.address = str(request.POST.get('address'))
         new_equipment.save()
     return render(request, 'home/sell.html')
 

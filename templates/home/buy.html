@@ -67,7 +67,7 @@
                         Price/day : {{i.price}}
                     </p>
 
-                    <form action="" id="form" method="post">
+                    <form action="" id="form" method="post" target="_blank">
                         {% csrf_token %}
                         <input hidden  type="text" name="uid" id="uid" value="{{i.uid}}">
                         <button type="submit" class="btn btn-primary" style="margin-left: 30%;">Details</button>
