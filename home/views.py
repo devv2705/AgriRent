@@ -56,7 +56,9 @@ def chat(request):
 
 def myequipment(request):
     verify_request(request)
-    soldeq = shared_equipment.objects.filter(owner=request.session['currentfarmer'])
+    # soldeq = shared_equipment.objects.filter(email=request.session['currentfarmer'])
+    # teneq = taken_equipment.objects.filter(email=request.session['currentfarmer'])
+    myeq = shared_equipment.objects.filter(farmer=farmer.objects.filter(email=request.session['currentfarmer']).first())
     return render(request, 'home/myequipment.html', {'myeq':myeq})
 
 def search(request):
@@ -116,7 +118,8 @@ def verify_request(request):
     else:
         currentdatetime = datetime.datetime.now()
         currentfarmer = farmer.objects.filter(email=request.session['currentfarmer']).first()
-        if (currentdatetime - currentfarmer.last_request_time).total_seconds() > 3600:
+        previousdatetime = currentfarmer.last_login.second
+        if currentdatetime.second - previousdatetime > 3600:
             del request.session['currentfarmer']
             request.session['error'] = "Session expired, signin again"
             return redirect('/signin')

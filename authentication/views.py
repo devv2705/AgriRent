@@ -1,3 +1,4 @@
+import datetime
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.db import IntegrityError
@@ -89,6 +90,7 @@ def signin(request):
         user=farmer.objects.filter(email=email,password=password).first()
         if user is not None:
             request.session['currentfarmer']=user.email
+            user.last_login=datetime.datetime.now()
             return redirect('/profile/')
         else:
             return render(request, 'authentication/signin.html',{"message":"invalid credentials"})
@@ -137,11 +139,13 @@ def verify_otp(request):
                                     email=request.session['newfarmer']['email'],
                                     password=request.session['newfarmer']['password'],
                                     mobile=request.session['newfarmer']['mobile'])
+                newfarmer.last_login = datetime.datetime.now()
                 newfarmer.save()
                 request.session['currentfarmer'] = newfarmer.email
                 del request.session['otp']
                 del request.session['newfarmer']
                 del request.session['signup_attempts']
+                
                 return redirect('/profile/')
             except IntegrityError:
                 messages.error(request, "unable to create account")
