@@ -120,6 +120,7 @@ li {
 }
 #delaccount{
     margin-top: 10%;
+    margin-bottom: 10%;
 }
 #new_pass{
     text-align: center;
@@ -138,4 +139,9 @@ li {
 
 .color:hover{
     color: black;
+}
+.d{
+    margin-right: 50%;
+    width: 700px;
+    translate: -25% 10%;
 }
