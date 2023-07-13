@@ -53,7 +53,7 @@ def pass_forgot_otp(request):
         if email not in farmer.objects.all().values_list('email', flat=True):
             return render(request, 'authentication/email_for_forgot_password.html',{"message":"email not found"})
         new_otp=random.randint(100000,999999)
-        if send_mail(email,new_otp,farmer.objects.get(email=email).name):
+        if send_mail(email,new_otp,farmer.objects.get(email=email).fname):
             request.session['email']=email
             request.session['otp']=new_otp
             request.session['n']=3
@@ -116,9 +116,9 @@ def send_mail(email,otp,name):
     <div class="container">
         <!-- Box with OTP -->
         <div class="box">
-            <p>Dear'''+name+''',</p>
+            <p>Dear '''+name+''',</p>
             <p>Here is your OTP:</p>
-            <p class="otp">'''+otp+'''</p>
+            <p class="otp">'''+str(otp)+'''</p>
         </div>
 
         <!-- Warning not to share OTP -->
@@ -177,8 +177,8 @@ def signup(request):
         if pass1!=pass2:
             return render(request, 'authentication/signup.html',{"message":"password must be same"})
         otp = random.randint(100000, 999999)
-        if send_mail(email, otp, 1):
-            request.session['otp'] = otp
+        if send_mail(email, otp, fname):
+            request.session['otp'] = str(otp)
             request.session['signup_attempts'] = 0
             request.session['newfarmer']={
                 "fname":fname,
@@ -196,7 +196,7 @@ def signup(request):
 def verify_otp(request):
     if request.method == "POST":
         otp = request.POST.get('otp')
-        if int(otp) == request.session['otp']:
+        if otp == request.session['otp']:
             try:
                 newfarmer = farmer(fname=request.session['newfarmer']['fname'],
                                     email=request.session['newfarmer']['email'],
