@@ -7,6 +7,11 @@ import smtplib
 from email.message import EmailMessage
 import random
 
+def alreadylogin(request):
+    if request.session.has_key('currentfarmer'):
+        return True
+    else:
+        return False
 def forgot_password(request):
     if request.session.has_key('error'):
         message=request.session['error']
@@ -80,6 +85,8 @@ def send_mail(email,otp,n):
         return False
 
 def signin(request):
+    if alreadylogin(request):
+        return redirect('/profile/')
     if request.session.has_key('error'):
         error=request.session['error']
         del request.session['error']
@@ -98,6 +105,8 @@ def signin(request):
 
 
 def signup(request):
+    if alreadylogin(request):
+        return redirect('/profile/')
     if request.session.has_key('error'):
         error=request.session['error']
         del request.session['error']

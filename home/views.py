@@ -28,7 +28,7 @@ def editprofile(request):
 
 def is_profilecomplete(request):
     currentfarmer = farmer.objects.filter(email=request.session['currentfarmer']).first()
-    if currentfarmer.pincode==None:
+    if currentfarmer.pincode==None or currentfarmer.pincode=="":
         return False
     else:
         return True
@@ -65,12 +65,16 @@ def chat(request):
     x=verify_request(request)
     if not x==None:
         return x
+    if is_profilecomplete(request)==False:
+        return redirect('/editprofile')
     return render(request,'home/chat.html')
 
 def myequipment(request):
     x=verify_request(request)
     if not x==None:
         return x
+    if is_profilecomplete(request)==False:
+        return redirect('/editprofile')
     currentfarmer = farmer.objects.filter(email=request.session['currentfarmer']).first()
     if request.method == "POST":
         which_eq = request.POST.get('equ')
@@ -80,10 +84,12 @@ def myequipment(request):
             return render(request,'home/myeq.html',{'eq':taken_equipment.objects.filter(taken_by=currentfarmer), 'which':which_eq})
     return render(request,'home/myeq.html',{'eq':shared_equipment.objects.filter(farmer=currentfarmer)})
 
-def search(request):
+def rentequipment(request):
     x=verify_request(request)
     if not x==None:
         return x
+    if is_profilecomplete(request)==False:
+        return redirect('/editprofile')
     if request.method == "POST":
         if 'equ' in request.POST:
             name = request.POST.get('equ')
@@ -107,6 +113,8 @@ def shareequipment(request):
     x=verify_request(request)
     if not x==None:
         return x
+    if is_profilecomplete(request)==False:
+        return redirect('/editprofile')
     if request.method == "POST":
         new_equipment = shared_equipment()
         new_equipment.farmer = farmer.objects.filter(email=request.session['currentfarmer']).first()
