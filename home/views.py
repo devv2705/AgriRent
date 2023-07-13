@@ -7,7 +7,9 @@ import string
 
 
 def editprofile(request):
-    verify_request(request)
+    x=verify_request(request)
+    if not x==None:
+        return x
     print(type(farmer.objects.filter(email=request.session['currentfarmer']).first()))
     if request.method == "POST":
         currentfarmer = farmer.objects.filter(email=request.session['currentfarmer']).first()
@@ -24,8 +26,17 @@ def editprofile(request):
         return redirect('/profile')
     return render(request,'home/editprofile.html',{'f':farmer.objects.filter(email=request.session['currentfarmer']).first()})
 
+def is_profilecomplete(request):
+    currentfarmer = farmer.objects.filter(email=request.session['currentfarmer']).first()
+    if currentfarmer.pincode==None:
+        return False
+    else:
+        return True
+
 def settings(request):
-    verify_request(request)
+    x=verify_request(request)
+    if not x==None:
+        return x
     if request.method=="POST":
         currentfarmer = farmer.objects.filter(email=request.session['currentfarmer']).first()
         if request.POST.has_key('delete'):
@@ -49,15 +60,17 @@ def settings(request):
         error=request.session['error']
         del request.session['error']
         return render(request,'home/settings.html',{'message':error})
-            
     return render(request,'home/settings.html')
-
 def chat(request):
-    verify_request(request)
+    x=verify_request(request)
+    if not x==None:
+        return x
     return render(request,'home/chat.html')
 
 def myequipment(request):
-    verify_request(request)
+    x=verify_request(request)
+    if not x==None:
+        return x
     currentfarmer = farmer.objects.filter(email=request.session['currentfarmer']).first()
     if request.method == "POST":
         which_eq = request.POST.get('equ')
@@ -68,7 +81,9 @@ def myequipment(request):
     return render(request,'home/myeq.html',{'eq':shared_equipment.objects.filter(farmer=currentfarmer)})
 
 def search(request):
-    verify_request(request)
+    x=verify_request(request)
+    if not x==None:
+        return x
     if request.method == "POST":
         if 'equ' in request.POST:
             name = request.POST.get('equ')
@@ -82,12 +97,16 @@ def search(request):
     return render(request, 'home/renteq.html', {})
 
 def profile(request):
-    verify_request(request)
+    x=verify_request(request)
+    if not x==None:
+        return x
     return render(request, 'home/profile.html', {'farmer':farmer.objects.filter(email=request.session['currentfarmer']).first()})
 
 
 def shareequipment(request):
-    verify_request(request)
+    x=verify_request(request)
+    if not x==None:
+        return x
     if request.method == "POST":
         new_equipment = shared_equipment()
         new_equipment.farmer = farmer.objects.filter(email=request.session['currentfarmer']).first()
@@ -122,7 +141,8 @@ def equipment_details(request, uid):
     return render(request, 'home/product.html', {'eq':eq})
     
 def verify_request(request):
-    if not request.session.has_key('currentfarmer'):
+    if  not request.session.has_key('currentfarmer'):
+        print("inside vefify request")
         request.session['error'] = "Signin to view this page"
         return redirect('/signin')
     else:
