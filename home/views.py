@@ -70,6 +70,9 @@ def myequipment(request):
     x=verify_request(request)
     if not x==None:
         return x
+    if is_profile_complete(request)==False:
+        messages.error(request,"You need to complete your profile for this feature")
+        return redirect(request.META.get('HTTP_REFERER'))
     currentfarmer = farmer.objects.filter(email=request.session['currentfarmer']).first()
     if request.method == "POST":
         which_eq = request.POST.get('equ')
@@ -83,7 +86,9 @@ def rentequipment(request):
     x=verify_request(request)
     if not x==None:
         return x
-    
+    if is_profile_complete(request)==False:
+        messages.error(request,"You need to complete your profile for this feature")
+        return redirect(request.META.get('HTTP_REFERER'))
     if request.method == "POST":
         if 'equ' in request.POST:
             name = request.POST.get('equ')
@@ -107,6 +112,9 @@ def shareequipment(request):
     x=verify_request(request)
     if not x==None:
         return x
+    if is_profile_complete(request)==False:
+        messages.error(request,"You need to complete your profile for this feature")
+        return redirect(request.META.get('HTTP_REFERER'))
     if request.method == "POST":
         new_equipment = shared_equipment()
         new_equipment.farmer = farmer.objects.filter(email=request.session['currentfarmer']).first()
