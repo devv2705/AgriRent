@@ -47,6 +47,7 @@ ul {
     background-color: aliceblue;
     padding-left: 10%;
     padding-top: 5%; 
+    width: 100vh;
 }
 .logo {
     padding-left: 18%;

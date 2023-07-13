@@ -1,19 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
 
-{% extends 'home/leftpanel.html' %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/home/css/form1.css">
+    <style>
+        #img-box{
+            padding-left:5% ;
+            padding-top: 4%;
+        }
+        p{
+            margin-top: 4%;
+        }
+        #detail{
+            overflow-x: hidden;
+        }
+        
+    </style>
+</head>
 
-{% block content %}
-    <div class="row" id="imgbox">
-        <img id="img" src="{{ eq.image.url }}" alt="">
-    </div>
-    <div class="row">
-        <p>Equipment Name: {{ eq.name }}</p>
-        <p>Company: {{ eq.company }}</p>
-        <p>Model: {{ eq.model }}</p>
-        <p>Address: {{ eq.address }}</p>
-        <p>Village/City: {{ eq.village }}, {{ eq.city }}, {{ eq.state }}, {{ eq.country }}</p>
-        <p>Price/day: {{ eq.price }}</p>
-        <p>Farmer Name: {{ eq.farmer.fname }}</p>
-        <p>Contact Number: {{ eq.mobile }}</p>
-        <p style="align-content: flex-start; display: flex; width: 100vh;">Equipment Description: {{ eq.description }}</p>
-    </div>
-{% endblock %}
+<body>
+    <section class="row" id="detail">
+        <div class="col-md-5" id="img-box">
+            <div class="img">
+                <img id="img" style="object-fit: contain;"
+                    src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAI4AjgMBIgACEQEDEQH/xAAcAAEAAQUBAQAAAAAAAAAAAAAABgECBAUHAwj/xAA9EAABAwMCAwUFBAgHAQAAAAABAgMEAAUREiEGMUEHEyJRYRQycYGRFSOh8EJSYoKxwdHxFzNDVHWj0hb/xAAZAQEAAwEBAAAAAAAAAAAAAAAAAQIEAwb/xAAmEQEAAgIBAwIHAQAAAAAAAAAAAQIDETEEEiFBcQUiQoGhwdET/9oADAMBAAIRAxEAPwDuNKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoKZ3qtRm5vy7RxVAfElbtvurgiuR1q2ZdCFFKkbddOCPnUmoFKUoFKUoFKUoFKUoFKUoFKVYXWwvQVpC+enO9BfSlUzQVpVCcVr514ixFra+9ffbTrUzHbLi0j1xsn0zjPSg1HGYzP4Y/5dB/63KlFc6464gfZncOKTBU2n2svpEhQBUUoOMaSRjCjXRBQVpWjsd/Rdbtd4IQlC7a+GlAEkqBGQf4/St5QKUpQKUpQKUpQKoarVCNqDl/FnawixX6RbGEx5PdK0kpSSUnqCdW5qBcQ8YW6936Je5dvCJsUo7tfix4SVJOkKznPXat/wBoKoFwvTzEVlpiK1qacbbiJbU68FnWsqA1EbY+RPlUF4ghd0ptaFFJdWpxbvIDlgeg9apNJn1aa561iI7In33/AF0B/tqebjMhhiE9LUvDqClSUJBxpIUFEH1G2Kwbv2qyb3bVQZDX2a4JLfePxnlDS2D4s/3qEDhJ9cZp5PdpQ85hL6HULQr9YZyfFz2rUNILKlIGcKBTvz57fiBUTuuvK+Otc8W1WIn7py5xg/BeTIicRPuqZWFBCpOpK8b7gHcE4GPjW3unHM+RbPZYuiI0pxbzjjJUFuJUM4UfPc5Pw5Vzqz3xIIachd+6sgJDexPpt8q3kgd4hwuD2Yra8DfvkK5BJ323671TP3duqtPwquCcszmjiPHuzbleZMa22yZcvaHlMTCG2nVkkJLWMAq6bipzZe1J2IwWr1HXJd2CVtBKOQGc5O++ahHaJdZXEcez6XY7vdrKEqbdTgZCcauWk7dalFp4rkiNIQplDyXshSlvAqJOckEJrle00iNS2dPix9RfLNscTx6617eHpw9xva7RebxcXIc4quTocKEutqSjBPIbEE533PLpUh/xas3+wuH0b/8AVRpPEaVuFgxH3FvYbCBpUQSRjGw/JrYTL39kvD7RsTCzIWrSHGkqSCME4OTjmNvwqkZrz9X4aMnQdNWdf4zv0juSOP2gRZNuFxbjCPEU4W0rmvhsqUOYASFZ5H6GrU9ottBHeqj89+7dWcfVsVz1xiXO4dsMaGw48tyP7U4llHJS8KJwBsMrP1rBbst0de7luK6p0ZyjVgjGM9PUfWt8cPL21Mzp3q1XOJdoaZcB4PMKJAUBjcc6zKi3ZrFeh8KtMSUFDqX3dSSckHWalNEFKUoFWuau7VoxqwcZ86urHuDaHYEltxwtoW0pKlg40gg75oOMRUJlrn3adGamvKdWhtl0JCFKGnUcHbJUtI5YA1EDOKivFCUyrTCuCAjQ8PvUIBCW3RjUgAkkAZGMnfnyxW6D7zVvsTTOFIflPocCQcqIW6dI26lKR/SsDiuUxM+1mYjHdx1oakpT+qUlbZ3+BSM/sig8bJKiSYXcW1bbckskS4clg6JCQMFWnOF46ciPhmtPdUplTEOxPFEyEIUB7yuZGPmBWNGuqnorMSZrEhshcZ9QHhPMYI/O+K9Jt0Mxpl1xaUtw06VpKNJW6pRJGPP3j15etUyV3Xw09Jkimas24a1evvloYksgpXpGlRCgMk8xg7elZ7alNwmHJ0hTqS4oFAc1KwOucHAznrk+mKwGoa1guhxgAAkkLx1zn6Vt7TAQrRKkFKUoKdG22PMD886vHDhM6mYjh425akvoWptYDa0r0FXvAat+Xw/tVbs6xPIWIim3VkIKSQSBnJPpt/Gt5LsraGmg5Hlxm1KK0haFJDpI55OMn+tawNvFzW9Fy22ogoS6HCByzp2xt5Z+dFUnuC3Lgu3tpPdCE2GWEtEjVnABPmrl/L11F2uVwTOajSpZkIbA05c1jcc8+Z61jybiuPbVuNLUju9RYXklWnV4Sc9RkfSte+6HHYb4/wBUJP13/nWPqK/NGnoPg+Wey9ZnjU/pPbPxC5ZLXZJLcZt5TlsSz4zgAYbOeeelWt8Zz2prklpmOCsKGlwlaRk55Z9Px+mkWrPD9hKdRxFxsjP6LdYuoj9YH90Vsef3LrPCXHtoSyxAuclEaa8pThUrZrxZUPF054GfL4VP0LStIUlQUDyIOQa+TOI35MK9tqkFbbDsVlbeU6krSW07+u+d/Sut9kfFsuRKY4fkpacb7l19uQFK1r8Wd8n1P4b0HWqVQVWgVRaUrQpKwClQwQRsRVatUoAb0HF48ATFXK0LSpqRb7iqSy2vIUG14KcEYxhQAzv74ztUacbKLXcHXApBfUlvQtPjT3YOc5GQSVcvQHmal3aiy/aeIYt9gzEpek5b0aeiUjKTnZWRnby55FQq/Xx644XPfIKsIKgAEo8sAbCghjupLSIzg3bH3as+71xWfY7PduJXJLFrty5qo7JcdTq06STjOcgatthvnB51qnFhx1Wo4dAyFE+9+eldj7F7Y5Atsm8rcUn28Bttk9EJUfET1JJOD5fGg5gIUWCzIiToVwNzUrxNqbKCjCgcFOMjI3J+WOtTzhCMxHy+6dTcFCENFQz4yCdQ9QlJA9SK6jKuMlIK46EFzGyieVQDh6G4IV3YUjLzb51pzn9Dz/dNBn2+Fcr2p2RKmIat5I1tPuYbWSRpTyJ+fPJBznFQvimyyrVdnIapLkdTXiRlAWFJO4+PlWRxA64zapK23HEORxqR4ykpwryB67D+1W8VSXbxZLDPnO6pUiKUuOoOCSDkcvVZ/Cgj7gCoS25gKW05KsuktnOwI6p+HptyrWx7qYzqY+hl9hpRSlYBJUAeafT0rYWtLglhmY33pIAQ5kaV593X02znPxHOpBJ7Krs4e9ivwmyB/lqcVjPoQMCq2rFuXXFnyYZ3jnUtZBusOTaosV9uYlUUFA0xlOawQncYP7PXzrKZLK2VKZttwcwPClYQxq+us1hNRn+H7h9nXYpambHGrUCCdjkbYrazoL8iGp1PtDjMgBtbbCwC2UK1cjuD546VZy3to+IY9zk2yRJuCWm2Y7vex29eruUnSgoB8vd28xnbJrxs0pLbkUpUYjiX0h4t6tk5zrA+XMc+VbbiiO7bOGPZpUd6MJGhuO27nUpIUFFW/wAPxqPWlt1+VHjKDi1hwJHdHxFJONj88b9cUH1xHdbfYbeZWFtuJCkKB2UCNjXpXnHabYYbZZSENtpCEpHQAYAr0oFeTydQxXrVDQQvi21iRFU3rWO9BTz9K47d+A7mlJRHfDzWgIKHCcqwcg58/WvoGXEEqSSsHQnpWDKtaXAShGAKD55tPDFwgTEOzIDUgNnkVHB+I6/Cuu2i4vS4yS4x3Wnw6QNhsOXpWzdshJPh/Cr4dtLC1EpOCMVIxnSsjao9w6tq0cWOw5DgU1cU5GrYheolIPxyoDzyKmKox/VP0qM8W2dqVBW4zFSqekpDTmoIUnxeZ6YzRDGv1thRripq7RRIiPJ2OCcgKGCR5ee22PSon2kPM6oUBCG2Wmmfu0pIwkK3A29AD862445usNlyDcGYr77WxcdTqO3UgbHpv161z7iKY5cZLxkKK1r0rCzjc5/pUJY1h7164NMA+PvEtpdJ2GT19OW9fQcZHs8ZljWV902lGpXM4GMmuT9mHCS7xMRcZrS/YoytST0ecB8I9Qnr9POuzphkjcUET41sieJbazD9sajFt8O63Eav0VDHMY51yhu93C1uJbktpW4ydSFuhQVsSAcgjIHnXaeKYqhCeisxVqeeZIS6k40E7Z+NcxncAXOatTr2tbhG+VAE9eVBE7vdZd7uHtFxfU65oJBzslIHr9a6j2NcEy1T4/EN1jllhls+ytvp8biui8H3U9R1J9BvAv8A5CfDkd62XW3mz92QN0mu4dm0164wHGZy3UzI2AslWUuDooeXXb8gJ2M9arVqQQMZzV1ApSlBZoG/rTuk+VX0oPEsI8hVpioPQfSsilBhKiI8q110hIQwVFjvckApBxW+rzU0lR8W48qDjd47Pnri7JeaC2Q8tSgE80g9M+WKi0zs1ubZAQ/qCBsVpya+jtAxgDAryXEaWN0A0HOOz9m8NN+wT1oJaSO7OAnUkdAPSuhMxyEjUkZ+FE29pLqXEpAKTkEVmCgxTCaUrKkgnzIqohtpUFIGlQGMgVlUoNVKskWS53i20lR5nSN6pAsrMKSHmUhKtwSBzHlW2pQKUpQKUpQKUpQKUpQKUpQKUpQKUpQKUpQKUpQKUpQf/9k="
+                    alt="">
+                </div>
+            
+        </div>
+        <div class="col-md-7">
+            <aside>
+
+            <p>Equipment Name: {{ eq.name }}</p>
+            <p>Company: {{ eq.company }}</p>
+            <p>Model: {{ eq.model }}</p>
+            <p>Address: {{ eq.address }}</p>
+            <p>Village/City: {{ eq.village }}, {{ eq.city }}, {{ eq.state }}, {{ eq.country }}</p>
+            <p>Price/day: {{ eq.price }}</p>
+            <p>Farmer Name: {{ eq.farmer.fname }}</p>
+            <p>Contact Number: {{ eq.mobile }}</p>
+            <p style="align-content: flex-start; display: flex; width: 100vh;">Equipment Description: {{ eq.description
+                }}</p>
+            </aside>
+        </div>
+    </section>
+</body>
+
+</html>
