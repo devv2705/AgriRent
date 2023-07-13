@@ -1,43 +1,61 @@
 <!-- base.html -->
 <!DOCTYPE html>
 <html>
+
 <head>
     <!-- head section -->
     <link rel="stylesheet" href="/static/home/css/form1.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" href="/static/home/css/form1.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
 </head>
+
 <body>
     <div class="row">
-        <!-- left panel (static) -->
         <div class="col-md-3">
             <figure>
                 <a href="#" class="logo"><img src="https://imagetolink.com/ib/u7YRfckarR.png" alt=""></a>
             </figure>
             <ul style="margin-top: 5%; padding-left: 5%;">
-                <li><a class="operation" href="/profile/"><img
-                            src="/static/images/profile.png" alt=""
+                <li><a class="operation" href="/profile/"><img src="/static/images/profile.png" alt=""
                             style="height: 10%;width: 10%;">&nbsp;Profile</a></li>
                 <li><a class="operation" href="/renteq/"><img src="/static/images/renteq.png" alt=""
                             style="height: 10%;width: 10%;">&nbsp;Rent Equipments</a></li>
                 <li><a class="operation" href="/shareeq/"><img src="/static/images/shareeq.png" alt=""
                             style="height: 10%;width: 10%;">&nbsp;Share Equipments</a></li>
-                <li><a class="operation" href="/myeq/"><img
-                            src="/static/images/myeq.png" alt=""
+                <li><a class="operation" href="/myeq/"><img src="/static/images/myeq.png" alt=""
                             style="height: 10%;width: 10%;">&nbsp;My Equipments</a></li>
-                <li><a class="operation" href="/chat/"><img
-                            src="/static/images/chat.png"
-                            alt="" style="height: 10%;width: 10%;">&nbsp;Chat</a></li>
-                <li><a class="operation" href="/editprofile/"><img
-                            src="/static/images/edit_p.png"
-                            alt="" style="height: 10%;width: 10%;">&nbsp;Edit Profile</a></li>
-                <li><a class="operation" href="/settings/"><img
-                            src="/static/images/settings.png"
-                            alt="" style="height: 10%;width: 10%;">&nbsp;Settings</a></li>
+                <li><a class="operation" href="/chat/"><img src="/static/images/chat.png" alt=""
+                            style="height: 10%;width: 10%;">&nbsp;Chat</a></li>
+                <li><a class="operation" href="/editprofile/"><img src="/static/images/edit_p.png" alt=""
+                            style="height: 10%;width: 10%;">&nbsp;Edit Profile</a></li>
+                <li><a class="operation" href="/settings/"><img src="/static/images/settings.png" alt=""
+                            style="height: 10%;width: 10%;">&nbsp;Settings</a></li>
                 <li style="padding-right: 45px;"><a class="operation" href="/signout/"><img
-                            src="/static/images/logout.jpg"
-                            alt="" style="height: 12%;width: 12%;">&nbsp;Log Out</a></li>
+                            src="/static/images/logout.jpg" alt="" style="height: 12%;width: 12%;">&nbsp;Log Out</a>
+                </li>
             </ul>
+        </div>
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalCenterTitle">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>This is a vertically centered modal.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-md-9">
             {% block content %}
@@ -45,4 +63,5 @@
         </div>
     </div>
 </body>
+
 </html>
