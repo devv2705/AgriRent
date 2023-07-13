@@ -22,7 +22,7 @@ def editprofile(request):
         currentfarmer.p_image = request.FILES.get('image')
         currentfarmer.save()
         return redirect('/profile')
-    return render(request,'home/complateProfile.html',{'f':farmer.objects.filter(email=request.session['currentfarmer']).first()})
+    return render(request,'home/editprofile.html',{'f':farmer.objects.filter(email=request.session['currentfarmer']).first()})
 
 def settings(request):
     verify_request(request)
@@ -76,14 +76,14 @@ def search(request):
             print(name, pincode)
             all_equipment = shared_equipment.objects.filter(name=name)
             print(all_equipment)
-            return render(request, 'home/buy.html', {'eq':all_equipment, 'pincode':pincode, 'name':name})
+            return render(request, 'home/renteq.html', {'eq':all_equipment, 'pincode':pincode, 'name':name})
         elif 'uid' in request.POST:
             return redirect('/eid='+request.POST.get('uid'))
-    return render(request, 'home/buy.html', {})
+    return render(request, 'home/renteq.html', {})
 
 def profile(request):
     verify_request(request)
-    return render(request, 'home/user.html', {'farmer':farmer.objects.filter(email=request.session['currentfarmer']).first()})
+    return render(request, 'home/profile.html', {'farmer':farmer.objects.filter(email=request.session['currentfarmer']).first()})
 
 
 def shareequipment(request):
@@ -107,7 +107,7 @@ def shareequipment(request):
         new_equipment.no_of_eq= request.POST.get('n_eq')
         new_equipment.address = str(request.POST.get('address'))
         new_equipment.save()
-    return render(request, 'home/sell.html')
+    return render(request, 'home/shareeq.html')
 
 def generate_equipment_id(length):
     characters = string.ascii_uppercase + string.ascii_lowercase + string.digits

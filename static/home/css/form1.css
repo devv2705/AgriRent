@@ -22,12 +22,18 @@ a {
     font-size: 22px;
     color: black;
 }
-
+.operation{
+    text-decoration: none;
+    color: black;
+}
+.operation:hover{
+    color: green;
+    text-decoration: underline;
+}
 ul {
     list-style-type: none;
     padding-top: 10%;
 }
-
 #add {
     margin-left: 45%;
     margin-bottom: 3%;
