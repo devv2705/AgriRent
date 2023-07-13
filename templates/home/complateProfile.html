@@ -1,182 +1,96 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-  <title>Give item for rent</title>
-  <link rel="stylesheet" href="/static/home/css/form1.css">
-</head>
-
-<body>
-
-  <section class="row">
-    {% include "home/leftpanel.html" %}
-    <div class="col-md-9">
-      <form class="form" action="" id="form" method="post" enctype="multipart/form-data">
+{% extends 'home/leftpanel.html' %}
+{% block content %}
+<link rel="stylesheet" href="/static/home/css/form1.css">
+<div class="col-md-9">
+    <form class="form" action="" id="form" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="mb-3">
-          <label for="name" class="form-label">Name</label>
-          <input value="{{f.fname}}" type="text" class="form-control" name="name" id="name"
-            aria-describedby="emailHelp">
+            <label for="name" class="form-label">Name</label>
+            <input value="{{f.fname}}" type="text" class="form-control" name="name" id="name"
+                aria-describedby="emailHelp">
         </div>
         <div class="mb-3">
-          <label for="number" class="form-label">Mobile Number</label>
-          <input value="{{f.mobile}}" type="number" name="model" class="form-control" id="number"
-            aria-describedby="emailHelp" readonly>
+            <label for="number" class="form-label">Mobile Number</label>
+            <input value="{{f.mobile}}" type="number" name="model" class="form-control" id="number"
+                aria-describedby="emailHelp" readonly>
         </div>
         <div class="mb-3">
-          <label for="mail" class="form-label">Email</label>
-          <input value="{{f.email}}" type="email" name="company" class="form-control" id="mail" readonly>
+            <label for="mail" class="form-label">Email</label>
+            <input value="{{f.email}}" type="email" name="company" class="form-control" id="mail" readonly>
         </div>
         <div class="mb-3">
-          <label for="dob" class="form-label">Date of Birth</label>
-          <input value="{{f.dob}}" type="date" class="form-control" name="dob" id="dob" required>
+            <label for="dob" class="form-label">Date of Birth</label>
+            <input value="{{f.dob}}" type="date" class="form-control" name="dob" id="dob" required>
         </div>
         <div class="mb-3">
-          <label for="pincode" class="form-label">Pincode</label>
-          <input value="{{f.pincode}}" type="number" class="form-control" name="pincode" id="pincode" required>
+            <label for="pincode" class="form-label">Pincode</label>
+            <input value="{{f.pincode}}" type="number" class="form-control" name="pincode" id="pincode" required>
         </div>
         <div id="addressFields" style="display: none;">
-          <div class="mb-3">
-            <label for="city" class="form-label">City</label>
-            <input type="text" class="form-control" name="city" id="city">
-          </div>
-          <div class="mb-3">
-            <label for="state" class="form-label">State</label>
-            <input type="text" class="form-control" name="state" id="state">
-          </div>
-          <div class="mb-3">
-            <label for="country" class="form-label">Country</label>
-            <input type="text" class="form-control" name="country" id="country">
-          </div>
-          <div class="mb-3">
-            <div id="villagesContainer" style="display: none;">
-              <label for="company" class="form-label">Village</label>
-              <select name="village" id="villages" disabled required class="form-control">
-                <option value=""></option>
-              </select>
+            <div class="mb-3">
+                <label for="city" class="form-label">City</label>
+                <input type="text" class="form-control" name="city" id="city">
             </div>
-          </div>
+            <div class="mb-3">
+                <label for="state" class="form-label">State</label>
+                <input type="text" class="form-control" name="state" id="state">
+            </div>
+            <div class="mb-3">
+                <label for="country" class="form-label">Country</label>
+                <input type="text" class="form-control" name="country" id="country">
+            </div>
+            <div class="mb-3">
+                <div id="villagesContainer" style="display: none;">
+                    <label for="company" class="form-label">Village</label>
+                    <select name="village" id="villages" disabled required class="form-control">
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
         </div>
         <div class="mb-3">
-          <label for="address" class="form-label">Address</label>
-          <textarea required name="address" class="form-control" id="address" cols="30" rows="2"
-            id="address"></textarea>
+            <label for="address" class="form-label">Address</label>
+            <textarea required name="address" class="form-control" id="address" cols="30" rows="2"
+                id="address"></textarea>
         </div>
         <div class="mb-3">
-          <label for="company" class="form-label">Upload profile Image</label>
-          <input type="file" class="form-control" accept=".png,.jpg,.jpeg" id="image" name="image" required>
+            <label for="company" class="form-label">Upload profile Image</label>
+            <input type="file" class="form-control" accept=".png,.jpg,.jpeg" id="image" name="image" required>
         </div>
         <div class="mb-3 form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
-          <label class="form-check-label" for="exampleCheck1">I have check my details</label>
+            <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+            <label class="form-check-label" for="exampleCheck1">I have checked my details</label>
         </div>
-        <button type="submit" onclick="pop()" class="btn btn-primary" id="add">submit</button>
-      </form>
-    </div>
-  </section>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    const selectElement = document.getElementById('villages');
-    const previouslySelectedValue = "{{f.village}}}";
-    if (previouslySelectedValue) {
-      selectElement.value = previouslySelectedValue;
-    }
-
-    function pop() {
-      let x = document.getElementById("dob").value
-      let y = document.getElementById("pincode").value
-      let z = document.getElementById("address").value
-      let w = document.getElementById("image").value
-      let block = document.getElementById("villages").value
-      let a = document.getElementById("exampleCheck").value
-      if (x == '' || y == '' || z == '' || w == '' || b == '' || a == '') {
-        alert('Please fill in all the information');
-      }
-      else {
-        alert('Your details have been successfully saved');
-      }
-    }
-
-    document.getElementById('pincode').addEventListener('input', function () {
-      let value = this.value;
-      if (value.length > 6) {
-        value = value.slice(0, 6); // Truncate to 6 digits
-      }
-      this.value = value;
-    });
-
-    $(document).ready(function () {
-      var pincodeInput = $('#pincode');
-      var cityInput = $('#city');
-      var stateInput = $('#state');
-      var countryInput = $('#country');
-      var villagesSelect = $('#villages');
-      var addressFields = $('#addressFields');
-      var villagesContainer = $('#villagesContainer');
-
-      pincodeInput.on('input', function () {
-        var pincode = pincodeInput.val();
-
-        if (pincode.length === 6 && /^\d+$/.test(pincode)) {
-          validatePincode(pincode);
-        } else {
-          resetForm();
+        <button type="submit" onclick="pop()" class="btn btn-primary" id="add">Submit</button>
+    </form>
+</div>
+    <script>
+        const selectElement = document.getElementById('villages');
+        const previouslySelectedValue = "{{f.village}}";
+        if (previouslySelectedValue) {
+            selectElement.value = previouslySelectedValue;
         }
-      });
 
-      function validatePincode(pincode) {
-        $.ajax({
-          url: `https://api.postalpincode.in/pincode/${pincode}`,
-          success: function (data) {
-            if (data[0].Status === 'Success') {
-              var postOffice = data[0].PostOffice;
-              var city = postOffice[0].Block;
-              var state = postOffice[0].State;
-              var country = postOffice[0].Country;
-              var villages = postOffice.map(function (office) {
-                return office.Name;
-              });
-
-              cityInput.val(city);
-              stateInput.val(state);
-              countryInput.val(country);
-
-              pincodeInput.removeClass('error');
-              addressFields.css('display', 'block');
-              villagesContainer.css('display', 'block');
-
-              villagesSelect.empty().append($('<option>').text('Select a village'));
-              villages.forEach(function (village) {
-                villagesSelect.append($('<option>').text(village).val(village));
-              });
-              villagesSelect.prop('disabled', false);
+        function pop() {
+            let x = document.getElementById("dob").value;
+            let y = document.getElementById("pincode").value;
+            let z = document.getElementById("address").value;
+            let w = document.getElementById("image").value;
+            let block = document.getElementById("villages").value;
+            let a = document.getElementById("exampleCheck").value;
+            if (x == '' || y == '' || z == '' || w == '' || b == '' || a == '') {
+                alert('Please fill in all the information');
             } else {
-              resetForm();
-              pincodeInput.addClass('error');
+                alert('Your details have been successfully saved');
             }
-          },
-          error: function () {
-            resetForm();
-            pincodeInput.addClass('error');
-          }
+        }
+
+        document.getElementById('pincode').addEventListener('input', function () {
+            let value = this.value;
+            if (value.length > 6) {
+                value = value.slice(0, 6); // Truncate to 6 digits
+            }
+            this.value = value;
         });
-      }
-
-      function resetForm() {
-        cityInput.val('');
-        stateInput.val('');
-        countryInput.val('');
-        villagesSelect.empty().append($('<option>').text('Select a village')).prop('disabled', true);
-        addressFields.css('display', 'none');
-        villagesContainer.css('display', 'none');
-      }
-    });
-
-  </script>
-</body>
-
-</html>
+    </script>
+{% endblock %}

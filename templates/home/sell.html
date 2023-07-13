@@ -1,190 +1,84 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- shareeq.html -->
+{% extends 'home/leftpanel.html' %}
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-  <title>Give item for rent</title>
-  <link rel="stylesheet" href="/static/home/css/form1.css">
-</head>
-
-<body>
-
-  <section class="row">
-    {% include "home/leftpanel.html" %}
-    <div class="col-md-9">
-      <form class="form" action="" id="form" method="post" enctype="multipart/form-data">
+{% block content %}
+    <form class="form" action="" id="form" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="mb-3">
-          <label for="num" class="form-label">Mobile Number</label>
-          <input type="number" class="form-control" name="num" id="num" aria-describedby="emailHelp" required>
+            <label for="num" class="form-label">Mobile Number</label>
+            <input type="number" class="form-control" name="num" id="num" aria-describedby="emailHelp" required>
         </div>
         <div class="mb-3">
-          <label for="equ" class="form-label">Equipment</label>
-          <select name="equ" id="equ" class="form-control" required>
-            <option value="" selected>Select Equipments</option>
-            <option value="tractor">tractor</option>
-            <option value="harvestor">harvestor</option>
-          </select>
+            <label for="equ" class="form-label">Equipment</label>
+            <select name="equ" id="equ" class="form-control" required>
+                <option value="" selected>Select Equipments</option>
+                <option value="tractor">tractor</option>
+                <option value="harvestor">harvestor</option>
+            </select>
         </div>
         <div class="mb-3">
-          <label for="model" class="form-label">Model Number</label>
-          <input type="text" name="model" class="form-control" id="model" aria-describedby="emailHelp">
+            <label for="model" class="form-label">Model Number</label>
+            <input type="text" name="model" class="form-control" id="model" aria-describedby="emailHelp">
         </div>
         <div class="mb-3">
-          <label for="company" class="form-label">Company</label>
-          <input type="text" name="company" class="form-control" id="company">
+            <label for="company" class="form-label">Company</label>
+            <input type="text" name="company" class="form-control" id="company">
         </div>
         <div class="mb-3">
-          <label for="company" class="form-label">Number Of Available Equipment</label>
-          <input type="number" class="form-control" name="n_eq" id="n_eq">
+            <label for="company" class="form-label">Number Of Available Equipment</label>
+            <input type="number" class="form-control" name="n_eq" id="n_eq">
         </div>
         <div class="mb-3">
-          <label for="company" class="form-label">Rent/day</label>
-          <input type="number" class="form-control" name="price" id="price">
+            <label for="company" class="form-label">Rent/day</label>
+            <input type="number" class="form-control" name="price" id="price">
         </div>
         <div class="mb-3">
-          <label for="pincode" class="form-label">Pincode</label>
-          <input type="number" class="form-control" name="pincode" id="pincode" required>
+            <label for="pincode" class="form-label">Pincode</label>
+            <input type="number" class="form-control" name="pincode" id="pincode" required>
         </div>
         <div id="addressFields" style="display: none;">
-          <div class="mb-3">
-            <label for="city" class="form-label">City</label>
-            <input type="text" class="form-control" name="city" id="city">
-          </div>
-          <div class="mb-3">
-            <label for="state" class="form-label">State</label>
-            <input type="text" class="form-control" name="state" id="state">
-          </div>
-          <div class="mb-3">
-            <label for="country" class="form-label">Country</label>
-            <input type="text" class="form-control" name="country" id="country">
-          </div>
-          <div class="mb-3">
-            <div id="villagesContainer" style="display: none;">
-              <label for="company" class="form-label">Village</label>
-              <select name="village" id="villages" disabled required class="form-control">
-                <option value=""></option>
-              </select>
+            <div class="mb-3">
+                <label for="city" class="form-label">City</label>
+                <input type="text" class="form-control" name="city" id="city">
             </div>
-          </div>
+            <div class="mb-3">
+                <label for="state" class="form-label">State</label>
+                <input type="text" class="form-control" name="state" id="state">
+            </div>
+            <div class="mb-3">
+                <label for="country" class="form-label">Country</label>
+                <input type="text" class="form-control" name="country" id="country">
+            </div>
+            <div class="mb-3">
+                <div id="villagesContainer" style="display: none;">
+                    <label for="company" class="form-label">Village</label>
+                    <select name="village" id="villages" disabled required class="form-control">
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
         </div>
         <div class="mb-3">
-          <label for="discription" class="form-label">Address</label>
-          <textarea class="form-control" name="address" id="address" cols="30" rows="2"></textarea>
+            <label for="discription" class="form-label">Address</label>
+            <textarea class="form-control" name="address" id="address" cols="30" rows="2"></textarea>
         </div>
         <div class="mb-3">
-          <label for="discription" class="form-label">Description</label>
-          <textarea class="form-control" name="discription" id="discription" cols="30" rows="5"></textarea>
+            <label for="discription" class="form-label">Description</label>
+            <textarea class="form-control" name="discription" id="discription" cols="30" rows="5"></textarea>
         </div>
         <div class="mb-3">
-          <label for="company" class="form-label">Upload Image</label>
-          <input type="file" class="form-control" accept="image/*" id="image" name="image">
+            <label for="company" class="form-label">Upload Image</label>
+            <input type="file" class="form-control" accept="image/*" id="image" name="image">
         </div>
         <div class="mb-3 form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
-          <label class="form-check-label" for="exampleCheck1">Equipment must be in working condition</label>
+            <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+            <label class="form-check-label" for="exampleCheck1">Equipment must be in working condition</label>
         </div>
         <button type="submit" onclick="pop()" class="btn btn-primary" id="add">Apply</button>
-      </form>
-    </div>
-  </section>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
+    </form>
 
-    document.getElementById('pincode').addEventListener('input', function () {
-      let value = this.value;
-      if (value.length > 6) {
-        value = value.slice(0, 6); // Truncate to 6 digits
-      }
-      this.value = value;
-    });
-      $(document).ready(function () {
-      var pincodeInput = $('#pincode');
-      var cityInput = $('#city');
-      var stateInput = $('#state');
-      var countryInput = $('#country');
-      var villagesSelect = $('#villages');
-      var addressFields = $('#addressFields');
-      var villagesContainer = $('#villagesContainer');
-
-      pincodeInput.on('input', function () {
-        var pincode = pincodeInput.val();
-
-        if (pincode.length === 6 && /^\d+$/.test(pincode)) {
-          validatePincode(pincode);
-        } else {
-          resetForm();
-        }
-      });
-
-      function validatePincode(pincode) {
-        $.ajax({
-          url: `https://api.postalpincode.in/pincode/${pincode}`,
-          success: function (data) {
-            if (data[0].Status === 'Success') {
-              var postOffice = data[0].PostOffice;
-              var city = postOffice[0].Block;
-              var state = postOffice[0].State;
-              var country = postOffice[0].Country;
-              var villages = postOffice.map(function (office) {
-                return office.Name;
-              });
-
-              cityInput.val(city);
-              stateInput.val(state);
-              countryInput.val(country);
-
-              pincodeInput.removeClass('error');
-              addressFields.css('display', 'block');
-              villagesContainer.css('display', 'block');
-
-              villagesSelect.empty().append($('<option>').text('Select a village'));
-              villages.forEach(function (village) {
-                villagesSelect.append($('<option>').text(village).val(village));
-              });
-              villagesSelect.prop('disabled', false);
-            } else {
-              resetForm();
-              pincodeInput.addClass('error');
-            }
-          },
-          error: function () {
-            resetForm();
-            pincodeInput.addClass('error');
-          }
-        });
-      }
-
-      function resetForm() {
-        cityInput.val('');
-        stateInput.val('');
-        countryInput.val('');
-        villagesSelect.empty().append($('<option>').text('Select a village')).prop('disabled', true);
-        addressFields.css('display', 'none');
-        villagesContainer.css('display', 'none');
-      }
-    });
-    function pop() {
-      let x = document.getElementById('num').value;
-      let y = document.getElementById('equ').value;
-      let z = document.getElementById('villages').value;
-      let b = document.getElementById('n_eq').value;
-      let a = document.getElementById('price').value;
-      let w = document.getElementById('pincode').value;
-      let c = document.getElementById('image').value;
-      let d = document.getElementById('exampleCheck1').value;
-      if (x == '' || y == '' || z == '' || w == '' || b == '' || a == '') {
-        alert('Please fill in all the information');
-      }
-      else {
-        alert("Equipment saved successfully")
-      }
-    }
-    
-  </script>
-</body>
-
-</html>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Your script goes here
+    </script>
+{% endblock %}

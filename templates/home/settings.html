@@ -1,78 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- setting.html -->
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <title>Setting</title>
-    <link rel="stylesheet" href="/static/home/css/form1.css">
-
-</head>
-
-
-<body>
-    <section class="row">
-        {% include "home/leftpanel.html" %}
-        <div class="col-md-9">
-            <div class="card d">
-                <div class="card-body" >
+{% block content %}
+    <div class="card d">
+        <div class="card-body">
             <div class="row" id="sett">
                 <div id="resetpass">
-                <button id="btn" type="submit" class="form-control" onclick="rs()">Reset Password</button>
-                <div id="reset">
-                    <input id="new_pass" type="password" class="form-control" placeholder="Enter Current password" required>
-                    <input id="new_pass" type="password" class="form-control" placeholder="Enter New password" required>
-                    <input id="new_pass" type="password" class="form-control" placeholder="Enter Retype password" required>
-                    <button style="margin-right: 5%; margin-top: 2%;" type="button" class="btn btn-success color">Reset</button>
-                </div>
+                    <button id="btn" type="submit" class="form-control" onclick="rs()">Reset Password</button>
+                    <div id="reset">
+                        <input id="new_pass" type="password" class="form-control" placeholder="Enter Current password" required>
+                        <input id="new_pass" type="password" class="form-control" placeholder="Enter New password" required>
+                        <input id="new_pass" type="password" class="form-control" placeholder="Enter Retype password" required>
+                        <button style="margin-right: 5%; margin-top: 2%;" type="button" class="btn btn-success color">Reset</button>
+                    </div>
                 </div>
                 <br>
                 <div id="delaccount">
-                <button id="btn" type="submit" class="form-control" onclick="del()">Delete Account</button>
-                <div id="delete">
-                    <input id="new_pass" type="password" class="form-control" placeholder="Enter Password" required>
-                    <button style="margin-right: 5%; margin-top: 2%;"  type="button" class="btn btn-danger color">Delete</button>
+                    <button id="btn" type="submit" class="form-control" onclick="del()">Delete Account</button>
+                    <div id="delete">
+                        <input id="new_pass" type="password" class="form-control" placeholder="Enter Password" required>
+                        <button style="margin-right: 5%; margin-top: 2%;" type="button" class="btn btn-danger color">Delete</button>
+                    </div>
                 </div>
-            </div>
             </div>
         </div>
     </div>
-        </div>
-    </section>
+
     <script>
-        document.getElementById("reset").style.display = "none"
-        document.getElementById("delete").style.display = "none"
+        document.getElementById("reset").style.display = "none";
+        document.getElementById("delete").style.display = "none";
+
         function rs() {
-            let x = document.getElementById("reset")
-            let y = document.getElementById("delete")
+            let x = document.getElementById("reset");
+            let y = document.getElementById("delete");
             if (x.style.display === "none") {
-                x.style.display = "block"
+                x.style.display = "block";
                 y.style.display = 'none';
-
-            }
-            else {
-                x.style.display = "none"
+            } else {
+                x.style.display = "none";
             }
         }
+
         function del() {
-
-            let x = document.getElementById("delete")
-            let y = document.getElementById("reset")
+            let x = document.getElementById("delete");
+            let y = document.getElementById("reset");
             if (x.style.display === "none") {
-                x.style.display = "block"
-                y.style.display = "none"
-
+                x.style.display = "block";
+                y.style.display = "none";
+            } else {
+                x.style.display = "none";
             }
-            else {
-                x.style.display = "none"
-            }
-
         }
-
-        
     </script>
-</body>
-
-</html>
+{% endblock %}
