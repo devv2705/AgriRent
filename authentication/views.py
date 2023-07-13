@@ -53,7 +53,7 @@ def pass_forgot_otp(request):
         if email not in farmer.objects.all().values_list('email', flat=True):
             return render(request, 'authentication/email_for_forgot_password.html',{"message":"email not found"})
         new_otp=random.randint(100000,999999)
-        if send_mail(email,new_otp,2):
+        if send_mail(email,new_otp,farmer.objects.get(email=email).name):
             request.session['email']=email
             request.session['otp']=new_otp
             request.session['n']=3
@@ -63,17 +63,71 @@ def pass_forgot_otp(request):
             return render(request, 'authentication/email_for_forgot_password.html',{"message":"error in sending otp\n try again"})
     return render(request,'authentication/email_for_forgot_password.html')
         
-def send_mail(email,otp,n):
+def send_mail(email,otp,name):
     server = smtplib.SMTP('smtp.gmail.com', '587')
     msg = EmailMessage()
     msg['From'] = "team.agrirent@gmail.com"
     msg['To'] = email
-    if n == 1:
-        msg.set_content(f'{otp} is you otp for signup verifiaction\nDont not share with anyone\nThank you Agrirent Team')
-        msg['Subject'] = f'OTP for Agrirent verification'
-    elif n == 2:
-        msg.set_content(f'{otp} is you otp for password reset\nDont not share with anyone\nThank you Agrirent Team')
-        msg['Subject'] = f'OTP for Agrirent password reset'
+    html_content = '''
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Global styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Container styles */
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Box styles */
+        .box {
+            border: 1px solid #CCCCCC;
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* OTP styles */
+        .otp {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        /* Warning styles */
+        .warning {
+            color: red;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Email container -->
+    <div class="container">
+        <!-- Box with OTP -->
+        <div class="box">
+            <p>Dear'''+name+''',</p>
+            <p>Here is your OTP:</p>
+            <p class="otp">'''+otp+'''</p>
+        </div>
+
+        <!-- Warning not to share OTP -->
+        <p class="warning"><strong>Warning:</strong> Do not share this OTP with anyone.</p>
+    </div>
+</body>
+</html>
+'''
+    msg.add_alternative(html_content, subtype='html')
     try:
         server.starttls()
         server.login('team.agrirent@gmail.com', 'easjciiobhlwfhjy')

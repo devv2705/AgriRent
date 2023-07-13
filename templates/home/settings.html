@@ -2,29 +2,40 @@
 {% extends 'home/leftpanel.html' %}
 
 {% block content %}
-    <div class="card d">
-        <div class="card-body">
-            <div class="row" id="sett">
-                <div id="resetpass">
+<div class="card d">
+    <div class="card-body">
+        <div class="row" id="sett">
+            <div id="resetpass">
+                <form action="" method="post">
+                    {% csrf_token %}
                     <button id="btn" type="submit" class="form-control" onclick="rs()">Reset Password</button>
                     <div id="reset">
-                        <input id="new_pass" type="password" class="form-control" placeholder="Enter Current password" required>
-                        <input id="new_pass" type="password" class="form-control" placeholder="Enter New password" required>
-                        <input id="new_pass" type="password" class="form-control" placeholder="Enter Retype password" required>
-                        <button style="margin-right: 5%; margin-top: 2%;" type="button" class="btn btn-success color">Reset</button>
+                        <input id="cpass" name="cpass" type="password" class="form-control"
+                            placeholder="Enter Current password" required>
+                        <input id="pass1" name="pass1" type="password" class="form-control"
+                            placeholder="Enter New password" required>
+                        <input id="pass2" name="pass2" type="password" class="form-control"
+                            placeholder="Enter Retype password" required>
+                        <button style="margin-right: 5%; margin-top: 2%;" type="button"
+                            class="btn btn-success color">Reset</button>
                     </div>
-                </div>
-                <br>
+                </form>
+            </div>
+            <br>
+            <form action="" method="post">
+                {% csrf_token %}
                 <div id="delaccount">
                     <button id="btn" type="submit" class="form-control" onclick="del()">Delete Account</button>
                     <div id="delete">
-                        <input id="new_pass" type="password" class="form-control" placeholder="Enter Password" required>
-                        <button style="margin-right: 5%; margin-top: 2%;" type="button" class="btn btn-danger color">Delete</button>
+                        <input id="pass" name="pass" type="password" class="form-control" placeholder="Enter Password" required>
+                        <button style="margin-right: 5%; margin-top: 2%;" type="button"
+                            class="btn btn-danger color">Delete</button>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
+</div>
 
-    <script src="/static/home/js/setting.js"></script>
+<script src="/static/home/js/setting.js"></script>
 {% endblock %}

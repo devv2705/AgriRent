@@ -1,0 +1,10 @@
+{% if messages %}
+{% for message in messages %}
+<div style="text-align: center;" class="alert {{ message.tags }}">{{ message }}</div>
+{% endfor %}
+{% endif %}
+<script>
+    setTimeout(function () {
+        $('.alert').fadeOut('fast');
+    }, 3000);
+</script>

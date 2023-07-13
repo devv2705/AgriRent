@@ -2,6 +2,7 @@ import datetime
 from django.shortcuts import render,redirect
 from .models import shared_equipment, taken_equipment
 from authentication.models import farmer
+from django.contrib import messages
 import random
 import string
 
@@ -26,23 +27,20 @@ def editprofile(request):
         return redirect('/profile')
     return render(request,'home/editprofile.html',{'f':farmer.objects.filter(email=request.session['currentfarmer']).first()})
 
-def is_profilecomplete(request):
-    currentfarmer = farmer.objects.filter(email=request.session['currentfarmer']).first()
-    if currentfarmer.pincode==None or currentfarmer.pincode=="":
-        return False
-    else:
-        return True
-
 def settings(request):
     x=verify_request(request)
     if not x==None:
         return x
     if request.method=="POST":
         currentfarmer = farmer.objects.filter(email=request.session['currentfarmer']).first()
-        if request.POST.has_key('delete'):
-            currentfarmer.delete()
-            #add pop-up here
-            return redirect('/logout')
+        if 'pass' in request.POST:
+            cpass=request.POST.get('pass')
+            if cpass==currentfarmer.password:
+                currentfarmer.delete()
+                messages.success(request,"Account Deleted Successfully")
+                return redirect('/signout')
+            else:
+                messages.error(request,"Incorrect Password")
         else:
             cpass=request.POST.get('cpass')
             if cpass==currentfarmer.password:
@@ -51,21 +49,20 @@ def settings(request):
                 if pass1==pass2:
                     currentfarmer.password=pass1
                     currentfarmer.save()
-                    # add pop-up here
+                    messages.success(request,"Password Changed Successfully")
                     return redirect('/profile')
                 else:
-                    return render(request,'home/settings.html',{'message':'password must be same'})
-        
-    if request.session.has_key('error'):
-        error=request.session['error']
-        del request.session['error']
-        return render(request,'home/settings.html',{'message':error})
+                    messages.error(request,"Both Passwords are not same")
+            else:
+                messages.error(request,"Incorrect Password")
     return render(request,'home/settings.html')
+
+
 def chat(request):
     x=verify_request(request)
     if not x==None:
         return x
-    if is_profilecomplete(request)==False:
+    if profilecheck(request)==False:
         return redirect('/editprofile')
     return render(request,'home/chat.html')
 
@@ -73,8 +70,6 @@ def myequipment(request):
     x=verify_request(request)
     if not x==None:
         return x
-    if is_profilecomplete(request)==False:
-        return redirect('/editprofile')
     currentfarmer = farmer.objects.filter(email=request.session['currentfarmer']).first()
     if request.method == "POST":
         which_eq = request.POST.get('equ')
@@ -88,8 +83,7 @@ def rentequipment(request):
     x=verify_request(request)
     if not x==None:
         return x
-    if is_profilecomplete(request)==False:
-        return redirect('/editprofile')
+    
     if request.method == "POST":
         if 'equ' in request.POST:
             name = request.POST.get('equ')
@@ -113,8 +107,6 @@ def shareequipment(request):
     x=verify_request(request)
     if not x==None:
         return x
-    if is_profilecomplete(request)==False:
-        return redirect('/editprofile')
     if request.method == "POST":
         new_equipment = shared_equipment()
         new_equipment.farmer = farmer.objects.filter(email=request.session['currentfarmer']).first()
@@ -143,6 +135,12 @@ def generate_equipment_id(length):
         generate_equipment_id(length)
     return equipment_id
 
+def is_profile_complete(request):
+    currentfarmer = farmer.objects.filter(email=request.session['currentfarmer']).first()
+    if currentfarmer.pincode == None or currentfarmer.pincode=="":
+        return False
+    else:
+        return True
 
 def equipment_details(request, uid):
     eq = shared_equipment.objects.get(uid=uid)
