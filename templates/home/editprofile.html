@@ -1,6 +1,9 @@
 {% extends 'home/leftpanel.html' %}
 {% block content %}
 <link rel="stylesheet" href="/static/home/css/form1.css">
+<script src="/static/home/js/fetchpincode.js"></script>
+<script src="/static/home/js/verifydata.js"></script>
+<script src="/static/home/js/calenderPcolor.js"></script>
 <div class="col-md-9">
     <form class="form" action="" id="form" method="post" enctype="multipart/form-data">
         {% csrf_token %}
@@ -64,33 +67,4 @@
         <button type="submit" onclick="pop()" class="btn btn-primary" id="add">Submit</button>
     </form>
 </div>
-    <script>
-        const selectElement = document.getElementById('villages');
-        const previouslySelectedValue = "{{f.village}}";
-        if (previouslySelectedValue) {
-            selectElement.value = previouslySelectedValue;
-        }
-
-        function pop() {
-            let x = document.getElementById("dob").value;
-            let y = document.getElementById("pincode").value;
-            let z = document.getElementById("address").value;
-            let w = document.getElementById("image").value;
-            let block = document.getElementById("villages").value;
-            let a = document.getElementById("exampleCheck").value;
-            if (x == '' || y == '' || z == '' || w == '' || b == '' || a == '') {
-                alert('Please fill in all the information');
-            } else {
-                alert('Your details have been successfully saved');
-            }
-        }
-
-        document.getElementById('pincode').addEventListener('input', function () {
-            let value = this.value;
-            if (value.length > 6) {
-                value = value.slice(0, 6); // Truncate to 6 digits
-            }
-            this.value = value;
-        });
-    </script>
 {% endblock %}
