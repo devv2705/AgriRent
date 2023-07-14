@@ -66,6 +66,7 @@ def pass_forgot_otp(request):
 def send_mail(email,otp,name):
     server = smtplib.SMTP('smtp.gmail.com', '587')
     msg = EmailMessage()
+    msg['Subject'] = "OTP verification"
     msg['From'] = "team.agrirent@gmail.com"
     msg['To'] = email
     html_content = '''

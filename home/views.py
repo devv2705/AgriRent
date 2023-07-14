@@ -1,11 +1,10 @@
-import datetime
+from django.utils import timezone
 from django.shortcuts import render,redirect
 from .models import shared_equipment, taken_equipment
 from authentication.models import farmer
 from django.contrib import messages
 import random
 import string
-
 
 def editprofile(request):
     x=verify_request(request)
@@ -62,7 +61,8 @@ def chat(request):
     x=verify_request(request)
     if not x==None:
         return x
-    if profilecheck(request)==False:
+    if is_profile_complete(request)==False:
+        messages.error(request,"You need to complete your profile for this feature")
         return redirect('/editprofile')
     return render(request,'home/chat.html')
 
@@ -154,23 +154,27 @@ def equipment_details(request, uid):
     eq = shared_equipment.objects.get(uid=uid)
     return render(request, 'home/product.html', {'eq':eq})
     
+
 def verify_request(request):
-    if  not request.session.has_key('currentfarmer'):
-        print("inside vefify request")
-        request.session['error'] = "Signin to view this page"
+    if not request.session.has_key('currentfarmer'):
+        print("inside verify request")
+        request.session['error'] = "Sign in to view this page"
         return redirect('/signin')
     else:
-        currentdatetime = datetime.datetime.now()
         currentfarmer = farmer.objects.filter(email=request.session['currentfarmer']).first()
-        previousdatetime = currentfarmer.last_login.second
-        if currentdatetime.second - previousdatetime > 3600:
-            del request.session['currentfarmer']
-            request.session['error'] = "Session expired, signin again"
-            return redirect('/signin')
+        print(timezone.now() , currentfarmer.last_login,timezone.now()-currentfarmer.last_login)
+        if currentfarmer.last_login is not None:
+            if (timezone.now() - currentfarmer.last_login).total_seconds() > 3600*3:
+                del request.session['currentfarmer']
+                request.session['error'] = "Session Expired, Login Again"
+                return redirect('/signin')
+            else:
+                currentfarmer.last_login = timezone.now()
+                currentfarmer.save()
         else:
-            currentfarmer.last_request_time = currentdatetime
+            currentfarmer.last_login = timezone.now()
             currentfarmer.save()
-
+        return None
 
 def signout(request):
     if not request.session.has_key('currentfarmer'):
