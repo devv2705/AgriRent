@@ -3,6 +3,11 @@
 <script src="/static/home/js/fetchpincode.js"></script>
 <script src="/static/home/js/verifydata.js"></script>
 <script src="/static/home/js/calenderPcolor.js"></script>
+<style>
+    .error {
+        border: 2px solid red !important;
+    }
+</style>
 <form class="form" action="" id="form" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="mb-3">
@@ -24,7 +29,8 @@
     </div>
     <div class="mb-3">
         <label for="pincode" class="form-label">Pincode</label>
-        <input value="{{f.pincode}}" type="number" class="form-control" name="pincode" id="pincode" required>
+        <input onKeyPress="if(this.value.length==6) return false;" value="{{f.pincode}}" type="number" class="form-control" name="pincode" id="pincode" required>
+        <p id="perror" style="margin: 0;padding: 0; font-size: small;color: red;display: none;">*Please enter valid pincode to fetch the details</p>
     </div>
     <div id="addressFields" style="display: none;">
         <div class="mb-3">

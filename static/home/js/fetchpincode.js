@@ -1,17 +1,3 @@
-document.getElementById('pincode').addEventListener('input', function () {
-    let value = this.value;
-    if (value.length > 6) {
-        value = value.slice(0, 6); // Truncate to 6 digits
-    }
-    this.value = value;
-});
-document.getElementById('num').addEventListener('input', function () {
-    let value = this.value;
-    if (value.length > 10) {
-        value = value.slice(0, 10);
-    }
-    this.value = value;
-});
 $(document).ready(function () {
     var pincodeInput = $('#pincode');
     var cityInput = $('#city');
@@ -24,10 +10,17 @@ $(document).ready(function () {
     pincodeInput.on('input', function () {
         var pincode = pincodeInput.val();
 
-        if (pincode.length === 6 && /^\d+$/.test(pincode)) {
+        if (/^\d{6}$/.test(pincode)) {
+            pincodeInput.removeClass('error');
             validatePincode(pincode);
         } else {
+            pincodeInput.addClass('error');
             resetForm();
+            document.getElementById("perror").style.display = "block";
+        }
+
+        if (pincode.length > 6) {
+            pincodeInput.val(pincode.substring(0, 6));
         }
     });
 
@@ -48,23 +41,23 @@ $(document).ready(function () {
                     stateInput.val(state);
                     countryInput.val(country);
 
-                    pincodeInput.removeClass('error');
                     addressFields.css('display', 'block');
                     villagesContainer.css('display', 'block');
 
                     villagesSelect.empty().append($('<option>').text('Select a village'));
                     villages.forEach(function (village) {
-                        villagesSelect.append($('<option>').text(village).val(village));
+                        villagesSelect.append($('<option>').text(village));
                     });
+                    document.getElementById("perror").style.display = "none";
                     villagesSelect.prop('disabled', false);
                 } else {
                     resetForm();
-                    pincodeInput.addClass('error');
+                    document.getElementById("perror").style.display = "block";
                 }
             },
             error: function () {
                 resetForm();
-                pincodeInput.addClass('error');
+                document.getElementById("perror").style.display = "block";
             }
         });
     }

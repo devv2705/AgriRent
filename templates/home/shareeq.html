@@ -34,7 +34,8 @@
     </div>
     <div class="mb-3">
         <label for="pincode" class="form-label">Pincode</label>
-        <input type="number" class="form-control" name="pincode" id="pincode" required>
+        <input onKeyPress="if(this.value.length==6) return false;" value="{{f.pincode}}" type="number" class="form-control" name="pincode" id="pincode" required>
+        <p id="perror" style="margin: 0;padding: 0; font-size: small;color: red;display: none;">*Please enter valid pincode to fetch the details</p>
     </div>
     <div id="addressFields" style="display: none;">
         <div class="mb-3">
