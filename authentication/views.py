@@ -153,6 +153,7 @@ def signin(request):
         if user is not None:
             request.session['currentfarmer']=user.email
             user.last_login=timezone.now()
+            user.save()
             return redirect('/profile/')
         else:
             return render(request, 'authentication/signin.html',{"message":"invalid credentials"})
@@ -203,7 +204,7 @@ def verify_otp(request):
                                     email=request.session['newfarmer']['email'],
                                     password=request.session['newfarmer']['password'],
                                     mobile=request.session['newfarmer']['mobile'])
-                newfarmer.last_login = datetime.datetime.now()
+                newfarmer.last_login = timezone.now()
                 newfarmer.p_image = "/static/images/default.jpg"
                 newfarmer.save()
                 request.session['currentfarmer'] = newfarmer.email
