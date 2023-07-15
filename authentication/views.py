@@ -1,4 +1,4 @@
-import datetime
+from django.utils import timezone
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.db import IntegrityError
@@ -152,7 +152,7 @@ def signin(request):
         user=farmer.objects.filter(email=email,password=password).first()
         if user is not None:
             request.session['currentfarmer']=user.email
-            user.last_login=datetime.datetime.now()
+            user.last_login=timezone.now()
             return redirect('/profile/')
         else:
             return render(request, 'authentication/signin.html',{"message":"invalid credentials"})
