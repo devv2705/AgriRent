@@ -10,7 +10,6 @@ def editprofile(request):
     x=verify_request(request)
     if not x==None:
         return x
-    print(type(farmer.objects.filter(email=request.session['currentfarmer']).first()))
     if request.method == "POST":
         currentfarmer = farmer.objects.filter(email=request.session['currentfarmer']).first()
         currentfarmer.fname = request.POST.get('name')
@@ -23,6 +22,7 @@ def editprofile(request):
         currentfarmer.village = request.POST.get('village')
         currentfarmer.p_image = request.FILES.get('image')
         currentfarmer.save()
+        messages.success(request,"Profile Updated Successfully")
         return redirect('/profile')
     return render(request,'home/editprofile.html',{'f':farmer.objects.filter(email=request.session['currentfarmer']).first()})
 
@@ -82,24 +82,32 @@ def myequipment(request):
             return render(request,'home/myeq.html',{'eq':taken_equipment.objects.filter(taken_by=currentfarmer), 'which':which_eq})
     return render(request,'home/myeq.html',{'eq':shared_equipment.objects.filter(farmer=currentfarmer)})
 
+from geopy.distance import geodesic
+
 def rentequipment(request):
-    x=verify_request(request)
-    if not x==None:
+    x = verify_request(request)
+    if not x == None:
         return x
-    if is_profile_complete(request)==False:
-        messages.error(request,"You need to complete your profile for this feature")
+    if is_profile_complete(request) == False:
+        messages.error(request, "You need to complete your profile for this feature")
         return redirect(request.META.get('HTTP_REFERER'))
     if request.method == "POST":
         if 'equ' in request.POST:
             name = request.POST.get('equ')
             pincode = request.POST.get('pincode')
-            print(name, pincode)
-            all_equipment = shared_equipment.objects.filter(name=name)
-            print(all_equipment)
-            return render(request, 'home/renteq.html', {'eq':all_equipment, 'pincode':pincode, 'name':name})
+            given_coordinates = (pincode.latitude, pincode.longitude)
+
+            all_equipment = shared_equipment.objects.exclude(farmer=farmer.objects.filter(email=request.session['currentfarmer']).first())
+
+            # Calculate distances and sort the equipment based on proximity
+            sorted_equipment = sorted(all_equipment, key=lambda equipment: geodesic(given_coordinates, (equipment.pincode.latitude, equipment.pincode.longitude)).miles)
+
+            return render(request, 'home/renteq.html', {'eq': sorted_equipment, 'pincode': pincode, 'name': name})
         elif 'uid' in request.POST:
-            return redirect('/eid='+request.POST.get('uid'))
+            return redirect('/eid=' + request.POST.get('uid'))
     return render(request, 'home/renteq.html', {})
+
+
 
 def profile(request):
     x=verify_request(request)
@@ -134,6 +142,8 @@ def shareequipment(request):
         new_equipment.no_of_eq= request.POST.get('n_eq')
         new_equipment.address = str(request.POST.get('address'))
         new_equipment.save()
+        messages.success(request,"Equipment Shared Successfully")
+        return redirect('/shareeq')
     return render(request, 'home/shareeq.html')
 
 def generate_equipment_id(length):
@@ -157,12 +167,10 @@ def equipment_details(request, uid):
 
 def verify_request(request):
     if not request.session.has_key('currentfarmer'):
-        print("inside verify request")
         request.session['error'] = "Sign in to view this page"
         return redirect('/signin')
     else:
         currentfarmer = farmer.objects.filter(email=request.session['currentfarmer']).first()
-        print(timezone.now() , currentfarmer.last_login,timezone.now()-currentfarmer.last_login)
         if currentfarmer.last_login is not None:
             if (timezone.now() - currentfarmer.last_login).total_seconds() > 3600*3:
                 del request.session['currentfarmer']

@@ -39,38 +39,14 @@
                             src="/static/images/logout.jpg" alt="" style="height: 12%;width: 12%;">&nbsp;Log Out</a>
                 </li>
             </ul>
-
         </div>
-        <!-- <div class="modal fade" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalCenterTitle">Modal title</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        {{message}}
-                    </div>
-                    <div class="modal-footer">
-                        {% if close %}
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                            aria-label="Close">Close</button>
-                        {% endif %}
-                        <button type="button" class="btn btn-primary"><a
-                                style="text-decoration: none;color: white;font-size: medium;" href="/editprofile/">
-                                {{rbutton}}</a> </button>
-                    </div>
-                </div>
-            </div>
-        </div> -->
         <div class="col-md-9">
             {% include 'home/messages.html' %}
             {% block content %}
             {% endblock %}
         </div>
     </div>
-    
+
 </body>
 
 </html>

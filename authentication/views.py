@@ -4,63 +4,59 @@ from django.contrib import messages
 from django.db import IntegrityError
 from .models import farmer
 import smtplib
+from validate_email import validate_email
 from email.message import EmailMessage
 import random
 
-def alreadylogin(request):
-    if request.session.has_key('currentfarmer'):
-        return True
-    else:
-        return False
 def forgot_password(request):
-    if request.session.has_key('error'):
-        message=request.session['error']
-        del request.session['error']
-        return render(request, 'authentication/forgot_password.html',{"message":message,"email":request.session['email']})
+    if not request.session.has_key('n'):
+        return redirect('/forgotpass')
     if request.method == "POST":
-        print('third')
         pass1 = request.POST.get('pass1')
         pass2 = request.POST.get('pass2')
         otp   = request.POST.get('otp')
         if pass1!=pass2:
-            return render(request, 'authentication/forgot_password.html',{"message":"password must be same","email":request.session['email']})
+            messages.error(request,"Password must be same in both fields")
+            return redirect('/forgot_password')
         if int(otp)!=request.session['otp']:
             request.session['n']-=1
-            return render(request, 'authentication/forgot_password.html',{"message":"wrong otp","email":request.session['email']})
+            messages.error(request,"Incorrect OTP,You have "+str(request.session['n'])+" attempts left")
+            return redirect('/forgot_password')
         else:
-            print('sixth')
             if request.session['n']==0:
-                request.session['error']='you have reached maximum limit of otp verification'
-                return redirect('/forgot_password')
+                del request.session['email']
+                del request.session['otp']  
+                del request.session['n']
+                messages.error(request,"You have exceeded the number of attempts")
+                return redirect('/forgotpass')
             try:
-                print('eighth')
                 farmer.objects.filter(email=request.session['email']).update(password=pass1)
                 del request.session['email']
                 del request.session['otp']
                 del request.session['n']
+                messages.success(request,"Password Updated Successfully")
                 return redirect('/signin')
             except IntegrityError:
-                return render(request, 'authentication/signup.html',{"message":"error in updating password"})
+                messages.error(request,"Password Updation Failed")
+                return redirect('/forgot_password')
     return render(request, 'authentication/forgot_password.html',{"email":request.session['email']})
 
 def pass_forgot_otp(request):
-    if request.session.has_key('error'):
-        message=request.session['error']
-        del request.session['error']
-        return render(request, 'authentication/forgot_password.html',{"message":message})
     if request.method=="POST":
         email=request.POST.get('email')
         if email not in farmer.objects.all().values_list('email', flat=True):
-            return render(request, 'authentication/email_for_forgot_password.html',{"message":"email not found"})
+            messages.error(request,"Email not registered")
+            return redirect('/forgotpass')
         new_otp=random.randint(100000,999999)
         if send_mail(email,new_otp,farmer.objects.get(email=email).fname):
             request.session['email']=email
             request.session['otp']=new_otp
             request.session['n']=3
-            print(new_otp)
+            messages.success(request,"OTP sent to your email")
             return redirect('/forgot_password')
         else:
-            return render(request, 'authentication/email_for_forgot_password.html',{"message":"error in sending otp\n try again"})
+            messages.error(request,"OTP sending failed")
+            return redirect('/forgotpass')
     return render(request,'authentication/email_for_forgot_password.html')
         
 def send_mail(email,otp,name):
@@ -140,34 +136,27 @@ def send_mail(email,otp,name):
         return False
 
 def signin(request):
-    if alreadylogin(request):
-        return redirect('/profile/')
-    if request.session.has_key('error'):
-        error=request.session['error']
-        del request.session['error']
-        return render(request, 'authentication/signin.html',{"message":error})
     if request.method == "POST":
+        for i in request.POST:
+            print(i,"--",request.POST[i])
+            print()
         email=request.POST.get('email')
         password=request.POST.get('password')
+        print(email,password)
         user=farmer.objects.filter(email=email,password=password).first()
+        print(user)
         if user is not None:
             request.session['currentfarmer']=user.email
             user.last_login=timezone.now()
             user.save()
             return redirect('/profile/')
         else:
-            return render(request, 'authentication/signin.html',{"message":"invalid credentials"})
+            messages.error(request,"Invalid Credentials")
+            return redirect('/signin')
     return render(request, 'authentication/signin.html')    
 
 
 def signup(request):
-    if alreadylogin(request):
-        return redirect('/profile/')
-    if request.session.has_key('error'):
-        error=request.session['error']
-        del request.session['error']
-        return render(request, 'authentication/signup.html',{"message":error})
-    print(request.method)
     if request.method == "POST":
         fname=request.POST.get('fname')
         email=request.POST.get('email')
@@ -175,10 +164,16 @@ def signup(request):
         pass2=request.POST.get('pass2')
         mobile=request.POST.get('mobile')
         if farmer.objects.filter(email=email).exists():
-            return render(request, 'authentication/signup.html',{"message":"email is already registered with us"})
+            messages.error(request,"Email already exists")
+            return redirect('/signup')
         if pass1!=pass2:
-            return render(request, 'authentication/signup.html',{"message":"password must be same"})
+            messages.error(request,"Passwords must be same")
+            return redirect('/signup')
         otp = random.randint(100000, 999999)
+        
+        if not validate_email(email_address=email, check_format=True, check_blacklist=True, check_dns=True, dns_timeout=10, check_smtp=True, smtp_timeout=10, smtp_helo_host=None, smtp_from_address=None, smtp_debug=False):
+            messages.error(request,"Invalid email")
+            return redirect('/signup')
         if send_mail(email, otp, fname):
             request.session['otp'] = str(otp)
             request.session['signup_attempts'] = 0
@@ -189,15 +184,20 @@ def signup(request):
                 "mobile":mobile,
             
             }
+            messages.success(request, "OTP sent to your email")
             return redirect('/verify_otp')
         else:
-            return render(request, 'authentication/signup.html', {"message": "Invalid email"})
+            messages.error(request,"OTP sending failed")
+            return redirect('/signup')
     return render(request, 'authentication/signup.html')
 
 
 def verify_otp(request):
+    if not request.session.has_key('signup_attempts'):
+        return redirect('/signup')
     if request.method == "POST":
         otp = request.POST.get('otp')
+        print(otp, request.session['otp'])
         if otp == request.session['otp']:
             try:
                 newfarmer = farmer(fname=request.session['newfarmer']['fname'],
@@ -222,8 +222,8 @@ def verify_otp(request):
                 del request.session['otp']
                 del request.session['newfarmer']
                 del request.session['signup_attempts']
-                return render(request, 'authentication/signup.html', {"message": "you have exceeded otp attempts"})   
-            return render(request, 'authentication/otp.html', {"email": request.session['newfarmer']['email'],
-                                                                "message": "You are left with " + str(3 - request.session['signup_attempts']) + " attempts"})
+                return render(request, 'authentication/signup.html', {"message": "you have exceeded otp attempts"})
+            messages.error(request, "Invalid OTP,You have " + str(3 - request.session['signup_attempts']) + " attempts left")
+            return redirect('/verify_otp')
     return render(request, 'authentication/otp.html', {"email": request.session['newfarmer']['email']})
 

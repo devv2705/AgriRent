@@ -136,3 +136,5 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
 }
+
+GDAL_LIBRARY_PATH = "D:/gdal-3.7.1"
