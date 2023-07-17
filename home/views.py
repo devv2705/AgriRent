@@ -75,12 +75,16 @@ def myequipment(request):
         return redirect(request.META.get('HTTP_REFERER'))
     currentfarmer = farmer.objects.filter(email=request.session['currentfarmer']).first()
     if request.method == "POST":
-        which_eq = request.POST.get('equ')
-        if which_eq=="shared Equipments":
-            return render(request,'home/myeq.html',{'eq':shared_equipment.objects.filter(farmer=currentfarmer), 'which':which_eq})
-        elif which_eq=="rented Equipments":
-            return render(request,'home/myeq.html',{'eq':taken_equipment.objects.filter(taken_by=currentfarmer), 'which':which_eq})
-    return render(request,'home/myeq.html',{'eq':shared_equipment.objects.filter(farmer=currentfarmer)})
+        if 'equ' in request.POST:
+            which_eq = request.POST.get('equ')
+            if which_eq=="shared Equipments":
+                return render(request,'home/myeq.html',{'eq':shared_equipment.objects.filter(farmer=currentfarmer), 'which':which_eq})
+            elif which_eq=="rented Equipments":
+                return render(request,'home/myeq.html',{'eq':taken_equipment.objects.filter(taken_by=currentfarmer), 'which':which_eq})
+        else:
+            uid=request.POST.get('uid')
+            shared_equipment.objects.filter(uid=uid).delete()
+    return render(request,'home/myeq.html')
 
 from geopy.distance import geodesic
 
@@ -162,12 +166,19 @@ def is_profile_complete(request):
 
 def equipment_details(request, uid):
     eq = shared_equipment.objects.get(uid=uid)
+    if request.method == "POST":
+        if 'edit' in request.POST:
+            return render(request, 'home/editeq.html', {'eeq':eq})
+        elif 'delete' in request.POST:
+            eq.delete()
+            messages.success(request,"Equipment Deleted Successfully")
+            return redirect('/myeq')
     return render(request, 'home/product.html', {'eq':eq})
     
 
 def verify_request(request):
     if not request.session.has_key('currentfarmer'):
-        request.session['error'] = "Sign in to view this page"
+        messages.error(request,"Session Expired, Login Again")
         return redirect('/signin')
     else:
         currentfarmer = farmer.objects.filter(email=request.session['currentfarmer']).first()

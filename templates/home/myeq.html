@@ -43,9 +43,12 @@
 
             <form action="" id="form" method="post" target="_blank">
                 {% csrf_token %}
-                <input hidden  type="text" name="uid" id="uid" value="{{i.uid}}">
-                <button type="submit" class="btn btn-primary" style="margin-left: 30%;">Details</button>
+                <input hidden type="text" name="uid" id="uid" value="{{ i.uid }}">
+                <button type="button" class="btn btn-primary"><a style="text-decoration: none;color: white; font-size: medium;" href="/eid={{i.uid}}">Details</a></button>
+
+                <button type="submit" class="btn btn-danger" value="delete">Delete</button>
             </form>
+            
         </div>
     </div>
     <br>
