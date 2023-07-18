@@ -185,7 +185,7 @@ def verify_request(request):
         if currentfarmer.last_login is not None:
             if (timezone.now() - currentfarmer.last_login).total_seconds() > 3600*3:
                 del request.session['currentfarmer']
-                request.session['error'] = "Session Expired, Login Again"
+                messages.error(request,"Session Expired, Login Again")
                 return redirect('/signin')
             else:
                 currentfarmer.last_login = timezone.now()
