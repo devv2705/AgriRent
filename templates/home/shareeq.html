@@ -6,7 +6,7 @@
     {% csrf_token %}
     <div class="mb-3">
         <label for="num" class="form-label">Mobile Number</label>
-        <input type="number" class="form-control" name="num" id="num" aria-describedby="emailHelp" required>
+        <input min="2222222222" max="9999999999" type="number" class="form-control" name="num" id="num" aria-describedby="emailHelp" required>
     </div>
     <div class="mb-3">
         <label for="equ" class="form-label">Equipment</label>
@@ -26,7 +26,7 @@
     </div>
     <div class="mb-3">
         <label for="company" class="form-label">Number Of Available Equipment</label>
-        <input type="number" class="form-control" name="n_eq" id="n_eq">
+        <input max="10" type="number" class="form-control" name="n_eq" id="n_eq">
     </div>
     <div class="mb-3">
         <label for="company" class="form-label">Rent/day</label>

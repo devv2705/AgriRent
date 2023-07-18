@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/static/authentication/css/form1.css">
+</head>
+
+<body>
+    {% include 'home/messages.html' %}
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <div class="fadeIn first">
+                <img src="/static/authentication/images/logo.png" id="icon" alt="User Icon" />
+            </div>
+            <form id="form" method="post">
+                {%csrf_token%}
+                {% block content %}
+                {% endblock %}
+        </div>
+    </div>
+    <script>
+        document.getElementById('otp').addEventListener('input', function () {
+            let value = this.value;
+            if (value.length > 6) {
+                value = value.slice(0, 6); // Truncate to 6 digits
+            }
+            this.value = value;
+        });
+        // Get the form element
+        const form = document.getElementById('form');
+    </script>
+</body>
+
+</html>
