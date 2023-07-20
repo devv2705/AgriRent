@@ -24,22 +24,23 @@ To run this application locally, follow these steps:
 
 2. Create a virtual environment and activate it:
 
-      On macOS or Linux:
+      On macOS or Linux(run on root terminal):
 
        python -m venv venv
+       chmod +x venv/bin/activate
        venv/bin/activate
 
-      On Windows:
+      On Windows(run on administrative cmd):
 
        python -m venv venv
        venv\Scripts\activate
 
-3. Install the required dependencies:
+4. Install the required dependencies:
 
        pip install -r requirements.txt
 
-4. Run the development server:
+5. Run the development server:
 
        python manage.py runserver
 
-5. Access the application in your web browser at `http://localhost:8000/`.
+6. Access the application in your web browser at `http://localhost:8000/`.
