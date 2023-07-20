@@ -27,12 +27,12 @@ To run this application locally, follow these steps:
       On macOS or Linux:
 
        python -m venv venv
-       AgriRent/venv/bin/activate
+       venv/bin/activate
 
       On Windows:
 
        python -m venv venv
-       AgriRent\venv\Scripts\activate
+       venv\Scripts\activate
 
 3. Install the required dependencies:
 
