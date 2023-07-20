@@ -4,4 +4,4 @@ static/home/eqimages/*
 *.pyo
 *.db
 *.sqlite3
-
+venv/
