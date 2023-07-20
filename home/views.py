@@ -86,7 +86,15 @@ def myequipment(request):
             shared_equipment.objects.filter(uid=uid).delete()
     return render(request,'home/myeq.html')
 
+from geopy.geocoders import Nominatim
 from geopy.distance import geodesic
+
+def get_coordinates(pincode):
+    geolocator = Nominatim(user_agent="pincode_locator")
+    location = geolocator.geocode(str(pincode))
+    if location:
+        return location.latitude, location.longitude
+    return None, None
 
 def rentequipment(request):
     x = verify_request(request)
@@ -99,18 +107,21 @@ def rentequipment(request):
         if 'equ' in request.POST:
             name = request.POST.get('equ')
             pincode = request.POST.get('pincode')
-            given_coordinates = (pincode.latitude, pincode.longitude)
+            given_coordinates = get_coordinates(pincode)
+
+            if given_coordinates[0] is None or given_coordinates[1] is None:
+                messages.error(request, "Invalid pincode. Please enter a valid pincode.")
+                return redirect(request.META.get('HTTP_REFERER'))
 
             all_equipment = shared_equipment.objects.exclude(farmer=farmer.objects.filter(email=request.session['currentfarmer']).first())
 
             # Calculate distances and sort the equipment based on proximity
-            sorted_equipment = sorted(all_equipment, key=lambda equipment: geodesic(given_coordinates, (equipment.pincode.latitude, equipment.pincode.longitude)).miles)
+            sorted_equipment = sorted(all_equipment, key=lambda equipment: geodesic(given_coordinates, get_coordinates(equipment.pincode)).miles)
 
             return render(request, 'home/renteq.html', {'eq': sorted_equipment, 'pincode': pincode, 'name': name})
         elif 'uid' in request.POST:
             return redirect('/eid=' + request.POST.get('uid'))
     return render(request, 'home/renteq.html', {})
-
 
 
 def profile(request):
@@ -185,7 +196,7 @@ def verify_request(request):
         if currentfarmer.last_login is not None:
             if (timezone.now() - currentfarmer.last_login).total_seconds() > 3600*3:
                 del request.session['currentfarmer']
-                request.session['error'] = "Session Expired, Login Again"
+                messages.error(request,"Session Expired, Login Again")
                 return redirect('/signin')
             else:
                 currentfarmer.last_login = timezone.now()
