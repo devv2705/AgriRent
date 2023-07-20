@@ -12,6 +12,20 @@
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        /* Add a CSS class for highlighting the active option */
+        .active-option {
+            /* border-bottom: 2px solid #000; */
+            color: green;
+        }
+        ul img{
+            /* padding-bottom: %; */
+            margin-bottom: 4%;
+        }
+        .list{
+            margin: 4%;
+        }
+    </style>
 </head>
 
 <body>
@@ -21,21 +35,21 @@
                 <a href="#" class="logo"><img src="https://imagetolink.com/ib/u7YRfckarR.png" alt=""></a>
             </figure>
             <ul style="margin-top: 5%; padding-left: 5%;">
-                <li><a class="operation" href="/profile/"><img src="/static/images/profile.png" alt=""
+                <li class="list "><a class="operation {% if request.path == '/profile/' %}active-option{% endif %}" href="/profile/"><img src="/static/images/profile.png" alt=""
                             style="height: 10%;width: 10%;">&nbsp;Profile</a></li>
-                <li><a class="operation" href="/renteq/"><img src="/static/images/renteq.png" alt=""
+                <li class="list "><a class="operation {% if request.path == '/renteq/' %}active-option{% endif %}" href="/renteq/"><img src="/static/images/renteq.png" alt=""
                             style="height: 10%;width: 10%;">&nbsp;Rent Equipments</a></li>
-                <li><a class="operation" href="/shareeq/"><img src="/static/images/shareeq.png" alt=""
+                <li class="list"><a class="operation {% if request.path == '/shareeq/' %}active-option{% endif %}" href="/shareeq/"><img src="/static/images/shareeq.png" alt=""
                             style="height: 10%;width: 10%;">&nbsp;Share Equipments</a></li>
-                <li><a class="operation" href="/myeq/"><img src="/static/images/myeq.png" alt=""
+                <li class="list"><a class="operation {% if request.path == '/myeq/' %}active-option{% endif %}" href="/myeq/"><img src="/static/images/myeq.png" alt=""
                             style="height: 10%;width: 10%;">&nbsp;My Equipments</a></li>
-                <li><a class="operation" href="/chat/"><img src="/static/images/chat.png" alt=""
-                            style="height: 10%;width: 10%;">&nbsp;Chat</a></li>
-                <li><a class="operation" href="/editprofile/"><img src="/static/images/edit_p.png" alt=""
+                <!-- <li class="list {% if request.path == '/chat/' %}active-option{% endif %}"><a class="operation" href="/chat/"><img src="/static/images/chat.png" alt=""
+                            style="height: 10%;width: 10%;">&nbsp;Chat</a></li> -->
+                <li class="list"><a class="operation {% if request.path == '/editprofile/' %}active-option{% endif %}" href="/editprofile/"><img src="/static/images/edit_p.png" alt=""
                             style="height: 10%;width: 10%;">&nbsp;Edit Profile</a></li>
-                <li><a class="operation" href="/settings/"><img src="/static/images/settings.png" alt=""
+                <li class="list"><a class="operation {% if request.path == '/settings/' %}active-option{% endif %}" href="/settings/"><img src="/static/images/settings.png" alt=""
                             style="height: 10%;width: 10%;">&nbsp;Settings</a></li>
-                <li style="padding-right: 45px;"><a class="operation" href="/signout/"><img
+                <li class="list" style="padding-right: 45px;"><a class="operation {% if request.path == '/signout/' %}active-option{% endif %}" href="/signout/"><img
                             src="/static/images/logout.jpg" alt="" style="height: 12%;width: 12%;">&nbsp;Log Out</a>
                 </li>
             </ul>
