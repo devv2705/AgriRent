@@ -20,11 +20,19 @@ To run this application locally, follow these steps:
 
 1. Clone the repository to your local machine:
 
-git clone https://github.com/your-username/farmer-equipment-rental.git
+git clone https://github.com/smitkunpara/AgriRent.git
+
 2. Create a virtual environment and activate it:
 
+On macOS or Linux:
+
 python -m venv venv
-source AgriRent/venv/bin/activate # On Windows use AgriRent\venv\Scripts\activate
+source AgriRent/venv/bin/activate
+
+On Windows:
+
+python -m venv venv
+AgriRent\venv\Scripts\activate
 
 3. Install the required dependencies:
 
