@@ -24,12 +24,12 @@ To run this application locally, follow these steps:
 
 2. Create a virtual environment and activate it:
 
-            -On macOS or Linux:
+      -On macOS or Linux:
 
             python -m venv venv
             source AgriRent/venv/bin/activate
 
-            -On Windows:
+      -On Windows:
 
             python -m venv venv
             AgriRent\venv\Scripts\activate
