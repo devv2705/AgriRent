@@ -20,26 +20,26 @@ To run this application locally, follow these steps:
 
 1. Clone the repository to your local machine:
 
-            git clone https://github.com/smitkunpara/AgriRent.git
+       git clone https://github.com/smitkunpara/AgriRent.git
 
 2. Create a virtual environment and activate it:
 
       On macOS or Linux:
 
-            python -m venv venv
-            AgriRent/venv/bin/activate
+       python -m venv venv
+       AgriRent/venv/bin/activate
 
       On Windows:
 
-            python -m venv venv
-            AgriRent\venv\Scripts\activate
+       python -m venv venv
+       AgriRent\venv\Scripts\activate
 
 3. Install the required dependencies:
 
-            pip install -r requirements.txt
+       pip install -r requirements.txt
 
 4. Run the development server:
 
-            python manage.py runserver
+       python manage.py runserver
 
 5. Access the application in your web browser at `http://localhost:8000/`.
