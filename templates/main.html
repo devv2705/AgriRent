@@ -160,9 +160,10 @@
       align-items: center;
       background-color: #302f49;
       padding: 40px 80px;
+      height: 50vh;
     }
 
-    .footer .copy {
+    .footer form {
       color: #fff;
     }
 
@@ -226,10 +227,11 @@ input[type=submit]:hover {
   padding: 20px;
 }
 #contactus{
-    background-image: url("https://c4.wallpaperflare.com/wallpaper/674/65/161/farm-farmers-water-drops-rice-wallpaper-preview.jpg");
+    background-image: url("https://wallpapercave.com/dwp2x/wp3293993.jpg");
     height: 100vh;
     background-size: cover;
     background-attachment: fixed;
+    
 }
   </style>
 </head>
@@ -277,10 +279,16 @@ input[type=submit]:hover {
   </main>
   <section id="contactus">
     
-   
   </section>
   <footer class="footer">
-    <div class="copy">&copy; 2023 agrirent</div>
+    <form>
+      <legend style="text-align: center;">Contact  AgriRent</legend><br><br>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your email for enquiry" style="width: 40vh;">
+      </div><br>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
     <div class="bottom-links">
       <div class="links">
         <span>More Info</span>
@@ -293,6 +301,7 @@ input[type=submit]:hover {
         <a href="#"><i class="fab fa-facebook"></i></a>
         <a href="#"><i class="fab fa-twitter"></i></a>
         <a href="#"><i class="fab fa-instagram"></i></a>
+        
       </div>
     </div>
   </footer>
