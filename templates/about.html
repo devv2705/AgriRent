@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.99em;
+            /* text-shadow: 0 0 5px red; */
+            overflow-x: hidden;
+        }
+
+        #abc {
+
+            height: 70vh;
+            background-repeat: no-repeat;
+            background-size: cover;
+
+        }
+
+        body {
+            color: rgb(0, 0, 0);
+            background-color: rgb(255, 255, 255);
+            overflow-x: hidden;
+        }
+
+      
+
+
+        #Gallery {
+            color: rgb(0, 0, 0);
+            text-decoration: none;
+        }
+
+        #Gallery:hover {
+            color: rgb(255, 255, 255);
+            background-color: rgba(0, 0, 0, 0.526);
+        }
+
+        #heading {
+            margin: 20%;
+            text-align: center;
+            font-size: 85px;
+            margin-top: 10%;
+        }
+
+        p {
+            font-size: 30%;
+        }
+
+        h1 {
+            font-size: 90%;
+        }
+
+        #telescope {
+            padding-left: 200px;
+            margin-top: 10%;
+        }
+
+        #observe {
+            font-size: large;
+        }
+
+        .image {
+            background-image: url("https://images.unsplash.com/photo-1594691592787-f9b0179c6fcd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGZhcm0lMjBlcXVpcG1lbnR8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=900&q=60");
+            height: 100vh;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        #part1 {
+            float: left;
+            margin-left: 300px;
+            margin-top: 100px;
+        }
+
+        #part2 {
+            margin-left: 850px;
+            transform: translateY(100px);
+        }
+
+        .btn {
+            border: 2px solid white;
+            background-color: #fff;
+            color: #000;
+        }
+
+        a {
+            color: #000;
+            text-decoration: none;
+        }
+
+        .btn:hover * {
+            color: #fff;
+        }
+
+        #sub {
+            color: white;
+            background-color: #000;
+        }
+
+        #sub:hover {
+            color: black;
+            background-color: rgb(255, 255, 255);
+        }
+
+        #abc #am {
+            color: #000;
+            margin-left: 80px;
+            padding-top: 18px;
+            font-size: 2.1em;
+
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f5f5f5;
+        }
+
+        .logo {
+            padding-left: 2%;
+            padding-top: 10px;
+            padding-bottom: 5px;
+            width: 18%;
+
+        }
+
+        .nav-items {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: #f5f5f5;
+            margin-right: 20px;
+            font-size: large;
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'home/messages.html' %}
+    <header class="header" id="head">
+        <a href="#" class="logo"><img style="width: 25%;height: 25%;" src="static/authentication/images/logo.png"
+                alt=""></a>
+        <nav class="nav-items">
+            <button type="button" class="btn btn-light" style="margin-right: 10px;"><a href="/signin">Sign
+                    in</a></button>
+            <button type="button" class="btn btn-dark"><a href="signup" style="color: whitesmoke;">Sign up</a></button>
+
+        </nav>
+    </header>
+    <div id="heading">
+        <h1>OUR SERVICES</h1>
+        <p>We Provide services related to farming equipment.you can Rent or Share equipment on our platform.</p>
+    </div>
+    </section>
+    <hr>
+    <section style="width: cover;">
+        <div class="row ml-3">
+            <div id="telescope" class="col-sm-6">
+                <h2 id="planets">
+                    Rent Equipment</h2>
+                <br>
+                <p id="observe">
+                   You can Rent farming equipment </p>
+
+            </div>
+            <div class="col-sm-6">
+                <img src="https://plus.unsplash.com/premium_photo-1663011051022-428f8ae62a34?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZmFybSUyMGVxdWlwbWVudHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=900&q=60" class="img-fluid" alt="earth">
+            </div>
+        </div>
+
+        <div class="row ml-3">
+            <div id="telescope" class="col-sm-6">
+                <h2 id="planets">
+                    Share Equipment</h2>
+                <br>
+                <p id="observe">
+                    You can Share farming equipment
+                    </p>
+
+            </div>
+            <div class="col-sm-6">
+                <img src="https://images.unsplash.com/photo-1595702852378-f9c79111413f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8ZmFybSUyMGVxdWlwbWVudHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=900&q=60" class="img-fluid" alt="earth">
+            </div>
+        </div>
+    </section>
+    <hr>
+    <section class="image">
+
+    </section>
+    <footer>
+        <section id="footer" style="background-color:#fff; width: cover; height:52vh;">
+
+            <div id="part1" style="color: black;">
+                <h3>AgriRent</h3>
+                <br><br>
+                <p style="font-size: large;">Tel: 9328761189<br><br>
+                    Email:<br><br> pd2752003@gmail.com<br><br>
+                    mumbai-india</p>
+            </div>
+            <div id="part2" style="color: black;">
+                <h3>SUBSCRIBE</h3>
+                <br>
+                <p style="font-size: large;">Sign up to connect with AgriRent<br><br>
+                    Email </p>
+                <br>
+                <input type="text" style="border: 2px solid; ">
+
+                <button id="sub" class="bt" type="submit" style="border-radius: 10px; border:none;  ">Subscribe</button>
+            </div>
+        </section>
+    </footer>
+
+</body>
+
+</html>
