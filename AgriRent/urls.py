@@ -25,4 +25,5 @@ urlpatterns = [
     path('',include('authentication.urls')),
     path('',include('home.urls')),
     path('', lambda request: render(request, 'main.html'), name='home'),
+    path('aboutus/', lambda request: render(request, 'about.html'), name='aboutus'),
 ]

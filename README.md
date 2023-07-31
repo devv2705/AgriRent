@@ -39,8 +39,9 @@ To run this application locally, follow these steps:
 
        pip install -r requirements.txt
 
-5. Run the development server:
+5. Migrate and Run the server:
 
+       python manage.py migrate
        python manage.py runserver
 
 6. Access the application in your web browser at `http://localhost:8000/`.
