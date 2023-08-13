@@ -137,9 +137,6 @@ def send_mail(email,otp,name):
 
 def signin(request):
     if request.method == "POST":
-        for i in request.POST:
-            print(i,"--",request.POST[i])
-            print()
         email=request.POST.get('email')
         password=request.POST.get('password')
         print(email,password)
@@ -151,7 +148,7 @@ def signin(request):
             user.save()
             return redirect('/profile/')
         else:
-            messages.error(request,"Invalid Credentials")
+            messages.error(request,"Email or Password is incorrect")
             return redirect('/signin')
     return render(request, 'authentication/signin.html')    
 
