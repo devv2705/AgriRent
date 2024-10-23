@@ -1,8 +1,10 @@
 from django.utils import timezone
-from django.shortcuts import render,redirect
-from .models import shared_equipment, taken_equipment
+from django.shortcuts import render,redirect,get_object_or_404
+from .models import shared_equipment, taken_equipment,Message
 from authentication.models import farmer
 from django.contrib import messages
+from django.db.models import Q
+
 import random
 import string
 
@@ -211,3 +213,65 @@ def signout(request):
         return redirect('/')
     del request.session['currentfarmer']
     return redirect('/')
+
+
+def send_message(request, receiver_id, equipment_id):
+    if request.method == 'POST':
+        content = request.POST.get('content')  # Get the message content from the form
+        if content:  # Check if content is not empty
+            sender = farmer.objects.filter(email=request.session['currentfarmer']).first()  # Get the logged-in farmer
+            receiver = get_object_or_404(farmer, id=receiver_id)  # Get the receiver
+            equipment = get_object_or_404(shared_equipment, uid=equipment_id)  # Ensure you're using uid if that's what you're passing
+
+            # Create a new message
+            Message.objects.create(sender=sender, receiver=receiver, equipment=equipment, content=content)
+            messages.success(request, "Message sent successfully!")
+            return redirect('inbox')  # Redirect to the inbox after sending
+        else:
+            messages.error(request, "Message content cannot be empty.")
+            return redirect(request.META.get('HTTP_REFERER'))  # Redirect back to the previous page
+
+    return redirect('home')  # Redirect to the home page if it's not a POST request
+
+def inbox(request):
+    x = verify_request(request)
+    if x is not None:
+        return x
+    
+    currentfarmer = farmer.objects.filter(email=request.session['currentfarmer']).first()
+    received_messages = Message.objects.filter(receiver=currentfarmer).order_by('-timestamp')
+    
+    return render(request, 'home/inbox.html', {'messages': received_messages})
+
+
+def chat_with_owner(request, owner_id, equipment_id):
+    x = verify_request(request)
+    if not x == None:
+        return x
+
+    if is_profile_complete(request) == False:
+        messages.error(request, "You need to complete your profile for this feature")
+        return redirect('/editprofile')
+
+    current_farmer = farmer.objects.filter(email=request.session['currentfarmer']).first()
+    owner = get_object_or_404(farmer, id=owner_id)
+    equipment = get_object_or_404(shared_equipment, id=equipment_id)
+
+    # Check if it's a POST request to send a message
+    if request.method == "POST":
+        message_content = request.POST.get('message')
+        if message_content:
+            Message.objects.create(sender=current_farmer, receiver=owner, content=message_content, equipment=equipment)
+            messages.success(request, "Message sent successfully!")
+            return redirect('inbox')
+
+    # Fetch previous chat messages between current farmer and owner for this equipment
+    chat_messages = Message.objects.filter(
+        (Q(sender=current_farmer, receiver=owner) | Q(sender=owner, receiver=current_farmer)) & Q(equipment=equipment)
+    ).order_by('timestamp')
+
+    return render(request, 'home/chat.html', {
+        'owner': owner,
+        'equipment': equipment,
+        'chat_messages': chat_messages,
+    })

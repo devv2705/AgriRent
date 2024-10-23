@@ -1,0 +1,18 @@
+{% extends 'home/leftpanel.html' %}
+
+{% block content %}
+    <h2>Inbox</h2>
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>
+                    <strong>From:</strong> {{ message.sender.fname }} <br>
+                    <strong>Message:</strong> {{ message.content }} <br>
+                    <strong>Sent at:</strong> {{ message.timestamp|date:"D, d M Y H:i" }} <br>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No messages in your inbox.</p>
+    {% endif %}
+{% endblock %}

@@ -127,7 +127,7 @@ def send_mail(email,otp,name):
     msg.add_alternative(html_content, subtype='html')
     try:
         server.starttls()
-        server.login('team.agrirent@gmail.com', 'easjciiobhlwfhjy')
+        server.login('team.agrirent@gmail.com', 'opsj fsny pzuu udma')
         server.send_message(msg)
         server.quit()
         return True
